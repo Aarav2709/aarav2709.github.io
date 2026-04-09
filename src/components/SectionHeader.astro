@@ -16,30 +16,44 @@ const { title, number } = Astro.props;
   .section-header {
     display: flex;
     align-items: baseline;
-    gap: 0.75rem;
-    padding: 0 0 1.25rem;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 2rem;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 0.8rem;
+    padding: 0.15rem 0 0.95rem;
+    border-bottom: 1px dashed rgba(167, 192, 128, 0.32);
+    margin-bottom: 1.4rem;
   }
 
   .section-title {
     font-size: var(--section-size);
-    font-weight: 600;
+    font-weight: 400;
     margin: 0;
-    color: var(--primary-text);
-    letter-spacing: -0.03em;
+    color: #d9deb6;
+    letter-spacing: 0.03em;
     text-transform: lowercase;
     line-height: 1.2;
+    font-family: var(--font-display);
+    text-shadow: none;
   }
 
   .section-number {
-    font-family: var(--font-mono);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: auto;
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    background: none;
+    font-family: var(--font-hand);
     font-size: var(--font-size-xs);
-    color: var(--tertiary-text);
+    color: #bfd49f;
     font-weight: 500;
     letter-spacing: 0.05em;
     white-space: nowrap;
     flex-shrink: 0;
+    transform: rotate(-6deg);
   }
 
   @media (max-width: 768px) {

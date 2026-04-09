@@ -1,5 +1,6 @@
 ---
 import NavBar from "../components/NavBar.astro";
+import CustomCursor from "../components/CustomCursor.astro";
 
 interface Props {
   title?: string;
@@ -80,6 +81,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <div class="reading-progress" id="reading-progress"></div>
+    <CustomCursor />
     <NavBar />
 
     <slot />
@@ -147,9 +149,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <style>
   .footer {
-    margin-top: 3rem;
-    padding: 2rem 0;
-    border-top: 1px solid var(--border-color);
+    margin-top: 2.4rem;
+    padding: 1.5rem 0 2rem;
+    border-top: 1px solid rgba(167, 192, 128, 0.22);
   }
 
   .footer-inner {
@@ -163,16 +165,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
   .footer-left,
   .footer-right {
-    color: var(--tertiary-text);
+    color: #afc297;
     font-size: var(--font-size-xs);
-    font-weight: 400;
-    letter-spacing: 0.02em;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    font-family: var(--font-mono);
   }
 
   @media (max-width: 768px) {
     .footer {
-      margin-top: 2rem;
-      padding: 1.5rem 0;
+      margin-top: 1.6rem;
+      padding: 1.1rem 0 1.5rem;
+    }
+
+    .footer-inner {
+      padding: 0 var(--container-padding);
+      flex-direction: column;
+      gap: 0.3rem;
+      align-items: flex-start;
     }
   }
 </style>

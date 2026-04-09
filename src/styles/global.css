@@ -6,24 +6,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
 html {
   scroll-behavior: smooth;
   scrollbar-color: var(--accent-color) transparent;
   accent-color: var(--accent-color);
+  color-scheme: dark;
 }
 
 body {
+  position: relative;
   font-family: var(--font-family);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.6;
   color: var(--primary-text);
-  background: var(--bg-color);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(167, 192, 128, 0.18), transparent 44%),
+    radial-gradient(circle at 88% 22%, rgba(127, 187, 179, 0.14), transparent 40%),
+    linear-gradient(162deg, var(--bg-color) 0%, var(--bg-elevated) 100%);
   font-size: var(--font-size-base);
-  letter-spacing: -0.005em;
+  letter-spacing: 0.005em;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,14 +36,41 @@ body {
   min-height: 100vh;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(167, 192, 128, 0.17) 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+  opacity: 0.14;
+  z-index: -3;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(167, 192, 128, 0.06) 0,
+    rgba(167, 192, 128, 0.06) 16px,
+    transparent 16px,
+    transparent 32px
+  );
+  opacity: 0.25;
+  z-index: -2;
+}
+
 ::selection {
-  background: transparent;
-  color: inherit;
+  background: var(--accent-soft);
+  color: var(--primary-text);
 }
 
 :focus-visible {
   outline: 0.125rem solid var(--accent-color);
-  outline-offset: 0.125rem;
+  outline-offset: 0.2rem;
 }
 
 .container {
@@ -49,74 +79,82 @@ body {
   padding: 0 var(--container-padding);
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.06);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
-/* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
   line-height: 1.2;
   text-wrap: balance;
 }
 
-h1 { font-weight: 700; }
+h1 {
+  font-weight: 400;
+}
 
 a {
-  color: var(--accent-color);
+  color: var(--accent-strong);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   transition: var(--transition-smooth);
 }
 
 a:hover {
-  opacity: 0.7;
+  opacity: 1;
+  color: #c9e7a3;
 }
 
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
-/* Utility classes */
 .fade-in {
   opacity: 0;
-  animation: fadeIn 0.6s ease forwards;
+  animation: fadeIn 0.7s ease forwards;
 }
 
 .slide-up {
   opacity: 0;
   transform: translateY(20px);
-  animation: slideUp 0.6s ease forwards;
+  animation: slideUp 0.55s ease forwards;
 }
 
-/* Reading progress bar */
 .reading-progress {
   position: fixed;
   top: 0;
   left: 0;
-  height: 1px;
-  background: var(--accent-color);
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), #c1df97 60%, #9bd0a5);
   width: 0%;
   z-index: 9998;
   transition: width 0.1s ease-out;
+  box-shadow: 0 0 8px rgba(167, 192, 128, 0.4);
 }
 
 pre, code, kbd, samp {
   font-family: var(--font-mono);
+}
+
+pre,
+code {
+  text-shadow: none;
 }
 
 input, textarea, select {
@@ -124,7 +162,6 @@ input, textarea, select {
   -webkit-user-select: text;
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -136,5 +173,16 @@ input, textarea, select {
 
   html {
     scroll-behavior: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  body::before {
+    background-size: 20px 20px;
+  }
+
+  body::after {
+    background-size: 36px 36px;
+    opacity: 0.2;
   }
 }
