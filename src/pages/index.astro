@@ -167,9 +167,65 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
       </div>
     </section>
 
+    <section id="building" class="section fade-in">
+      <div class="container">
+        <SectionHeader title="currently building" number="04" />
+        <div class="building-list">
+          {
+            building.map((item, i) => (
+              <div class="building-item slide-up" style={`animation-delay: ${i * 0.1}s`}>
+                <div class="building-status">
+                  <span class="status-dot" />
+                </div>
+                <div class="building-info">
+                  <span class="building-name">{item.name}</span>
+                  <span class="building-desc">{item.description}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section fade-in">
+      <div class="container">
+        <SectionHeader title="contact" number="05" />
+        <ContactForm />
+      </div>
+    </section>
+
+    <section id="skills" class="section fade-in">
+      <div class="container">
+        <SectionHeader title="stack" number="06" />
+        <div class="stack-grid">
+          {
+            stackItems.map((item, si) => (
+              <div class="stack-item slide-up" style={`animation-delay: ${si * 0.04}s`}>
+                {
+                  item.icon && (
+                    <img
+                      class="skill-logo"
+                      src={`https://cdn.simpleicons.org/${item.icon}/a7c080`}
+                      width="14"
+                      height="14"
+                      loading="lazy"
+                      alt=""
+                    />
+                  )
+                }
+                <span class="skill-dash" aria-hidden="true"></span>
+                <span class="skill-name">{item.name}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <section id="commits" class="section fade-in">
       <div class="container">
-        <SectionHeader title="commit graph" number="04" />
+        <SectionHeader title="commit graph" number="07" />
         {
           contributionCells.length > 0 ? (
             <div class="contribution-wrapper">
@@ -209,62 +265,6 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
             <p class="contribution-empty">Contribution graph is unavailable right now.</p>
           )
         }
-      </div>
-    </section>
-
-    <section id="skills" class="section fade-in">
-      <div class="container">
-        <SectionHeader title="stack" number="05" />
-        <div class="stack-grid">
-          {
-            stackItems.map((item, si) => (
-              <div class="stack-item slide-up" style={`animation-delay: ${si * 0.04}s`}>
-                {
-                  item.icon && (
-                    <img
-                      class="skill-logo"
-                      src={`https://cdn.simpleicons.org/${item.icon}/a7c080`}
-                      width="14"
-                      height="14"
-                      loading="lazy"
-                      alt=""
-                    />
-                  )
-                }
-                <span class="skill-dash" aria-hidden="true"></span>
-                <span class="skill-name">{item.name}</span>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section id="building" class="section fade-in">
-      <div class="container">
-        <SectionHeader title="currently building" number="06" />
-        <div class="building-list">
-          {
-            building.map((item, i) => (
-              <div class="building-item slide-up" style={`animation-delay: ${i * 0.1}s`}>
-                <div class="building-status">
-                  <span class="status-dot" />
-                </div>
-                <div class="building-info">
-                  <span class="building-name">{item.name}</span>
-                  <span class="building-desc">{item.description}</span>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section fade-in">
-      <div class="container">
-        <SectionHeader title="contact" number="07" />
-        <ContactForm />
       </div>
     </section>
   </main>
@@ -394,14 +394,14 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
     display: flex;
     flex-direction: column;
     gap: 0.95rem;
-    width: min(100%, 48rem);
+    width: min(100%, 56rem);
     align-items: flex-start;
   }
 
   .about-content p {
     font-size: var(--font-size-small);
     line-height: 1.78;
-    color: var(--tertiary-text);
+    color: var(--secondary-text);
     max-width: 43rem;
     padding: 0;
     text-align: left;
@@ -520,7 +520,7 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
     gap: 0.8rem;
     align-items: center;
     justify-content: center;
-    color: #8ea183;
+    color: #a5b98f;
     font-size: var(--font-size-xs);
     font-family: var(--font-mono);
   }
@@ -598,7 +598,7 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
     flex-direction: column;
     gap: 0.55rem;
     margin-top: 1rem;
-    width: min(100%, 48rem);
+    width: min(100%, 56rem);
   }
 
   .building-item {
@@ -655,7 +655,7 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
 
   .building-desc {
     font-size: var(--font-size-small);
-    color: #879783;
+    color: #9aab8f;
     line-height: 1.55;
     font-weight: 500;
   }
