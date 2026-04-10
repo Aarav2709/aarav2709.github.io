@@ -45,7 +45,7 @@ const stackItems = [
   { name: "Vercel", icon: "vercel" },
   { name: "Git", icon: "git" },
   { name: "CMake", icon: "cmake" },
-  { name: "Solar2D" },
+  { name: "Rust", icon: "rust" },
   { name: "HTML/CSS", icon: "html5" },
 ];
 
@@ -193,6 +193,7 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
               </div>
               <div class="contribution-footer">
                 <span>{contributionTotal} commits this year</span>
+                <span class="commit-separator" aria-hidden="true"></span>
                 <div class="contribution-legend" aria-hidden="true">
                   <span>less</span>
                   <span class="contribution-cell level-0"></span>
@@ -531,6 +532,13 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
     text-transform: lowercase;
   }
 
+  .commit-separator {
+    width: 1px;
+    height: 0.85rem;
+    background: rgba(167, 192, 128, 0.52);
+    display: inline-block;
+  }
+
   .contribution-empty {
     color: #82927c;
     font-size: var(--font-size-xs);
@@ -544,6 +552,8 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
     gap: 0.72rem;
     margin-top: 1rem;
     width: min(100%, 62rem);
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .stack-item {
@@ -611,7 +621,11 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
   }
 
   .building-status {
-    padding-top: 0.35rem;
+    width: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.48rem;
   }
 
   .status-dot {

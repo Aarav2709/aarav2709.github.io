@@ -30,26 +30,6 @@ const navLinks = [
         </li>
       ))}
       <li class="divider" aria-hidden="true"></li>
-      <li id="theme-switcher">
-        <button id="theme-toggle-light" class="theme-btn" aria-label="Light theme" title="Light theme">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        </button>
-        <button id="theme-toggle-dark" class="theme-btn" aria-label="Dark theme" title="Dark theme">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-      </li>
       <li>
         <a href="https://github.com/Aarav2709/AarusPortfolio" target="_blank" rel="noopener noreferrer" class="nav-link nav-icon-link" aria-label="GitHub" title="GitHub">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -62,29 +42,6 @@ const navLinks = [
 </header>
 
 <script>
-  // Theme switcher
-  const lightBtn = document.getElementById('theme-toggle-light');
-  const darkBtn = document.getElementById('theme-toggle-dark');
-
-  function setTheme(theme: string) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    updateActiveTheme(theme);
-  }
-
-  function updateActiveTheme(theme: string) {
-    lightBtn?.classList.toggle('active', theme === 'light');
-    darkBtn?.classList.toggle('active', theme === 'dark');
-  }
-
-  lightBtn?.addEventListener('click', () => setTheme('light'));
-  darkBtn?.addEventListener('click', () => setTheme('dark'));
-
-  // Initialize
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  updateActiveTheme(savedTheme);
-
   // Active nav link tracking on scroll
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('#site-nav .nav-link[href^="#"]');
@@ -200,18 +157,19 @@ const navLinks = [
     max-width: var(--container-max);
     width: 100%;
     margin: 0 auto;
-    padding: 0.92rem var(--container-padding);
+    padding: 1.05rem var(--container-padding);
   }
 
   nav ul {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.95rem;
     list-style: none;
     margin: 0 auto;
     padding: 0;
     flex-wrap: wrap;
     justify-content: center;
+    row-gap: 0.5rem;
   }
 
   .divider {
@@ -311,43 +269,6 @@ const navLinks = [
     height: 0.95rem;
   }
 
-  #theme-switcher {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-  }
-
-  .theme-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.65rem;
-    height: 1.65rem;
-    border: none;
-    border-radius: 999px;
-    background: transparent;
-    color: var(--secondary-text);
-    cursor: pointer;
-    transition:
-      color 0.2s,
-      transform 0.2s;
-    padding: 0;
-  }
-
-  .theme-btn svg {
-    width: 0.92rem;
-    height: 0.92rem;
-  }
-
-  .theme-btn:hover {
-    color: var(--primary-text);
-    transform: translateY(-1px);
-  }
-
-  .theme-btn.active {
-    color: var(--accent-strong);
-  }
-
   @media (max-width: 768px) {
     #site-nav {
       top: 0;
@@ -356,13 +277,13 @@ const navLinks = [
     nav {
       width: 100%;
       max-width: none;
-      padding: 0.72rem var(--container-padding);
+      padding: 0.82rem var(--container-padding);
     }
 
     nav ul {
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.7rem;
+      gap: 0.75rem;
     }
 
     #home a span {

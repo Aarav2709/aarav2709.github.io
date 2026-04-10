@@ -116,7 +116,7 @@
     let isVisible = false;
 
     const interactiveSelector =
-      "a, button, [role='button'], input, textarea, select, .project, .highlight-card, .stack-item, .building-item, .contact-link";
+      "a, button, [role='button'], input, textarea, select, summary, label[for]";
 
     const setActive = (value: boolean) => {
       cursor.classList.toggle("active", value);

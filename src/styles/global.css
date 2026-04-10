@@ -6,6 +6,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 html {
@@ -155,11 +157,6 @@ pre, code, kbd, samp {
 pre,
 code {
   text-shadow: none;
-}
-
-input, textarea, select {
-  user-select: text;
-  -webkit-user-select: text;
 }
 
 @media (prefers-reduced-motion: reduce) {

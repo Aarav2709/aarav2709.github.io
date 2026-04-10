@@ -94,8 +94,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </footer>
 
     <script>
-      const theme = localStorage.getItem("theme") || "dark";
-      document.documentElement.setAttribute("data-theme", theme);
+      // Force dark theme globally and ignore prior stored preferences.
+      document.documentElement.setAttribute("data-theme", "dark");
+      try {
+        localStorage.setItem("theme", "dark");
+      } catch {}
 
       const updateProgress = () => {
         const scrollTop =
