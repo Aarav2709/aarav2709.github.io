@@ -1,6 +1,6 @@
 ---
 title: "Needlelight"
-description: "Rewrite of the Lumafly mod assistant. Faster startup, reduced memory footprint, and native cross platform tooling built with C# and Python."
+description: "Mod manager for Hollow Knight and Silksong with enhanced support, faster startup, and improved cross-platform tooling."
 tech: ["c#", "python"]
 github: "https://github.com/Aarav2709/Needlelight"
 featured: true

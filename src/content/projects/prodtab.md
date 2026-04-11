@@ -1,6 +1,6 @@
 ---
 title: "ProdTab"
-description: "Lightweight product tracking and journaling extension. Log ideas, track releases, and visualize trends. Published on Firefox Add-ons."
+description: "Firefox startpage extension with a calendar, bookmarks, notepad, and quick productivity widgets in one clean tab."
 tech: ["javascript", "html", "css"]
 github: "https://github.com/Aarav2709/ProdTab"
 order: 7

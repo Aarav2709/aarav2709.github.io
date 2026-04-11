@@ -51,46 +51,42 @@ const stackItems = [
 
 const highlights = [
   {
-    metric: "50k+",
-    label: "Downloads across Python and C projects.",
-  },
-  {
     metric: "100k+",
-    label: "Visitors across live deployments.",
+    title: "Python and C Downloads",
+    detail: "Combined downloads across my Python and C projects now crossing six figures.",
   },
   {
-    metric: "10+",
-    label: "Listed repos for minimalist design.",
+    metric: "500k+",
+    title: "Website Visitors",
+    detail: "Total visitors across my websites and shipped web projects.",
+  },
+  {
+    metric: "CS50",
+    title: "Harvard and MIT Certificate",
+    detail: "Completed CS50 and earned the certificate.",
+    certificate: {
+      image: "/images/certs/CS50P.png",
+      alt: "CS50 certificate",
+    },
   },
   {
     metric: "Top 80",
-    label: "GambitoR 4.0 at IIT Roorkee out of 100k+ participants.",
+    title: "IIT Roorkee Excellence",
+    detail: "Certificate of Excellence after competing with 100k+ students for 80 seats in the IIT Roorkee 3D tour program.",
   },
   {
-    metric: "Shastra 2026",
-    label: "Qualified both rounds at IIT Madras. DSA, coding, maths, and reasoning against school and college students.",
+    metric: "Shaastra",
+    title: "IIT Madras Qualification",
+    detail: "Qualified both rounds in DSA, coding, maths, and reasoning.",
+    certificate: {
+      image: "/images/certs/IITM.png",
+      alt: "Shaastra certificate",
+    },
   },
   {
-    metric: "3rd Global",
-    label: "Won Lumi Hackathon. Placed 3rd globally and received $200 in cash prizes.",
-  },
-];
-
-const building = [
-  {
-    name: "FR1: Reborn",
-    description: "Racing remake focused on cleaner netcode and tighter multiplayer loops.",
-    status: "active",
-  },
-  {
-    name: "FR2: Replayed",
-    description: "Second-entry rebuild with modernized systems, syncing, and progression.",
-    status: "active",
-  },
-  {
-    name: "SpankLaptop",
-    description: "Fast terminal utility in Rust for quick diagnostics and system cleanup.",
-    status: "active",
+    metric: "4th + $200",
+    title: "Lumi Hackathon",
+    detail: "Placed 4th with HyprWeb and won $200 in project prizes.",
   },
 ];
 
@@ -122,8 +118,8 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
           </p>
           <p>
             When I solve a problem, I publish the solution. When existing tools
-            fall short, I build better ones. That approach has led to 50k+
-            downloads, recognition across international hackathons, and a
+            fall short, I build better ones. That approach has led to 100k+
+            downloads, 500k+ website visitors, recognition across international hackathons, and a
             portfolio of tools used by developers worldwide.
           </p>
         </div>
@@ -137,8 +133,26 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
           {
             highlights.map((h, i) => (
               <div class="highlight-card slide-up" style={`animation-delay: ${i * 0.1}s`}>
-                <span class="highlight-metric">{h.metric}</span>
-                <span class="highlight-label">{h.label}</span>
+                <div class="highlight-head">
+                  <span class="highlight-metric">{h.metric}</span>
+                </div>
+                <h3 class="highlight-title">{h.title}</h3>
+                <p class="highlight-detail">{h.detail}</p>
+                {
+                  h.certificate && (
+                    <button
+                      type="button"
+                      class="highlight-link preview-trigger"
+                      data-preview-open
+                      data-preview-src={h.certificate.image}
+                      data-preview-alt={h.certificate.alt}
+                      data-preview-title={`${h.title} certificate`}
+                      aria-label={`Open certificate for ${h.title}`}
+                    >
+                      view certificate
+                    </button>
+                  )
+                }
               </div>
             ))
           }
@@ -158,6 +172,8 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
                 tech={project.data.tech}
                 github={project.data.github}
                 live={project.data.live}
+                previewImage={project.data.previewImage}
+                previewAlt={project.data.previewAlt}
                 stars={project.data.stars}
                 index={index}
               />
@@ -167,37 +183,16 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
       </div>
     </section>
 
-    <section id="building" class="section fade-in">
-      <div class="container">
-        <SectionHeader title="currently building" number="04" />
-        <div class="building-list">
-          {
-            building.map((item, i) => (
-              <div class="building-item slide-up" style={`animation-delay: ${i * 0.1}s`}>
-                <div class="building-status">
-                  <span class="status-dot" />
-                </div>
-                <div class="building-info">
-                  <span class="building-name">{item.name}</span>
-                  <span class="building-desc">{item.description}</span>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
     <section id="contact" class="section fade-in">
       <div class="container">
-        <SectionHeader title="contact" number="05" />
+        <SectionHeader title="contact" number="04" />
         <ContactForm />
       </div>
     </section>
 
     <section id="skills" class="section fade-in">
       <div class="container">
-        <SectionHeader title="stack" number="06" />
+        <SectionHeader title="stack" number="05" />
         <div class="stack-grid">
           {
             stackItems.map((item, si) => (
@@ -225,7 +220,7 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
 
     <section id="commits" class="section fade-in">
       <div class="container">
-        <SectionHeader title="commit graph" number="07" />
+        <SectionHeader title="commit graph" number="06" />
         {
           contributionCells.length > 0 ? (
             <div class="contribution-wrapper">
@@ -268,6 +263,24 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
       </div>
     </section>
   </main>
+
+  <div id="preview-modal" class="preview-modal" hidden>
+    <button
+      type="button"
+      class="preview-overlay"
+      data-preview-close
+      aria-label="Close image preview"
+    />
+    <div class="preview-dialog" role="dialog" aria-modal="true" aria-label="Image preview">
+      <div class="preview-header">
+        <p id="preview-modal-title" class="preview-title">Image preview</p>
+        <button type="button" class="preview-close" data-preview-close aria-label="Close image preview">
+          <span class="preview-close-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+      <img id="preview-modal-image" src="" alt="" loading="lazy" decoding="async" />
+    </div>
+  </div>
 
   <script is:inline>
     if (typeof window !== "undefined") {
@@ -376,6 +389,54 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
       } else {
         window.addEventListener("load", hydrateStars, { once: true });
       }
+
+      const previewModal = document.getElementById("preview-modal");
+      const previewImage = document.getElementById("preview-modal-image");
+      const previewTitle = document.getElementById("preview-modal-title");
+
+      const closePreviewModal = () => {
+        if (!previewModal || !previewImage) return;
+        previewModal.hidden = true;
+        previewImage.setAttribute("src", "");
+        previewImage.setAttribute("alt", "");
+        if (previewTitle) {
+          previewTitle.textContent = "Image preview";
+        }
+        document.body.classList.remove("preview-open");
+      };
+
+      const openPreviewModal = (src, alt, title) => {
+        if (!previewModal || !previewImage || !src) return;
+        previewImage.setAttribute("src", src);
+        previewImage.setAttribute("alt", alt || "Image preview");
+        if (previewTitle) {
+          previewTitle.textContent = title || alt || "Image preview";
+        }
+        previewModal.hidden = false;
+        document.body.classList.add("preview-open");
+      };
+
+      document.querySelectorAll("[data-preview-open]").forEach((trigger) => {
+        trigger.addEventListener("click", (event) => {
+          event.preventDefault();
+          const source = event.currentTarget;
+          if (!(source instanceof HTMLElement)) return;
+          const src = source.getAttribute("data-preview-src");
+          const alt = source.getAttribute("data-preview-alt");
+          const title = source.getAttribute("data-preview-title");
+          openPreviewModal(src, alt, title);
+        });
+      });
+
+      document.querySelectorAll("[data-preview-close]").forEach((closeControl) => {
+        closeControl.addEventListener("click", closePreviewModal);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closePreviewModal();
+        }
+      });
     }
   </script>
 </Layout>
@@ -419,35 +480,214 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0.45rem;
-    padding: 0.95rem 1rem;
-    border: 1px solid rgba(167, 192, 128, 0.28);
-    border-radius: 0.75rem;
-    background: linear-gradient(145deg, rgba(55, 66, 72, 0.36), rgba(49, 59, 64, 0.3));
-    box-shadow: var(--shadow);
+    gap: 0.35rem;
+    padding: 1rem 1.05rem;
+    border: 1px solid rgba(167, 192, 128, 0.24);
+    border-radius: 0.8rem;
+    background:
+      linear-gradient(135deg, rgba(58, 69, 75, 0.44), rgba(42, 50, 55, 0.44)),
+      radial-gradient(circle at top right, rgba(181, 214, 145, 0.12), transparent 50%);
+    box-shadow: 0 10px 22px rgba(17, 23, 24, 0.36);
     transition: var(--transition-smooth);
+    overflow: visible;
   }
 
   .highlight-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     border-color: rgba(181, 214, 145, 0.48);
-    box-shadow: var(--shadow-raised);
+    box-shadow: 0 18px 34px rgba(17, 23, 24, 0.48);
+  }
+
+  .highlight-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
   }
 
   .highlight-metric {
-    font-size: 2rem;
+    font-size: clamp(1.45rem, 2.8vw, 1.95rem);
     font-weight: 400;
-    color: #dfeab9;
+    color: #e6f2c3;
     letter-spacing: 0.03em;
     line-height: 1.1;
     font-family: var(--font-display);
   }
 
-  .highlight-label {
+  .highlight-title {
+    margin: 0.1rem 0 0;
+    font-size: var(--font-size-base);
+    color: #d4dfb0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.34;
+  }
+
+  .highlight-detail {
+    margin: 0;
     font-size: var(--font-size-xs);
-    color: #7f8f7b;
-    line-height: 1.52;
+    color: #8fa186;
+    line-height: 1.58;
     font-weight: 500;
+  }
+
+  .highlight-link {
+    margin-top: 0.2rem;
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    color: #cde5a6;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+    border-bottom: 1px dashed rgba(181, 214, 145, 0.5);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: none;
+    appearance: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .highlight-link:hover {
+    color: #ebf8c9;
+    border-bottom-color: rgba(213, 239, 173, 0.75);
+  }
+
+  .preview-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2200;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+  }
+
+  .preview-modal[hidden] {
+    display: none;
+  }
+
+  .preview-overlay {
+    position: absolute;
+    inset: 0;
+    border: none;
+    background: rgba(7, 10, 11, 0.76);
+    cursor: pointer;
+  }
+
+  .preview-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(95vw, 62rem);
+    max-height: 88vh;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(181, 214, 145, 0.45);
+    background: rgba(22, 29, 33, 0.97);
+    padding: 0.75rem;
+    box-shadow: 0 24px 44px rgba(0, 0, 0, 0.56);
+  }
+
+  .preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.55rem;
+    padding: 0.25rem 0.2rem 0.35rem;
+    border-bottom: 1px dashed rgba(167, 192, 128, 0.32);
+  }
+
+  .preview-title {
+    margin: 0;
+    color: #d4e5b8;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+  }
+
+  .preview-dialog img {
+    display: block;
+    width: 100%;
+    max-height: calc(88vh - 4rem);
+    object-fit: contain;
+    border-radius: 0.45rem;
+    background: rgba(21, 27, 31, 0.82);
+  }
+
+  .preview-close {
+    position: static;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 2.05rem;
+    height: 2.05rem;
+    padding: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(181, 214, 145, 0.48);
+    background:
+      radial-gradient(circle at 30% 24%, rgba(200, 231, 159, 0.2), transparent 58%),
+      rgba(36, 45, 50, 0.96);
+    color: #edf9d0;
+    font-size: 0;
+    line-height: 1;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow:
+      0 8px 14px rgba(0, 0, 0, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .preview-close-icon {
+    position: relative;
+    width: 0.96rem;
+    height: 0.96rem;
+    color: currentColor;
+  }
+
+  .preview-close-icon::before,
+  .preview-close-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.95rem;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transform-origin: center;
+  }
+
+  .preview-close-icon::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .preview-close-icon::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  .preview-close:hover {
+    transform: translateY(-1px);
+    border-color: rgba(220, 245, 183, 0.86);
+    background:
+      radial-gradient(circle at 30% 24%, rgba(220, 245, 183, 0.25), transparent 58%),
+      rgba(58, 70, 76, 0.98);
+    color: #ffffff;
+  }
+
+  .preview-close:focus-visible {
+    outline: 2px solid rgba(220, 245, 183, 0.65);
+    outline-offset: 2px;
+  }
+
+  .preview-close:active {
+    transform: translateY(0);
+  }
+
+  :global(body.preview-open) {
+    overflow: hidden;
   }
 
   .projects-grid {
@@ -593,73 +833,6 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
     transform: translateY(-1px);
   }
 
-  .building-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-    margin-top: 1rem;
-    width: min(100%, 56rem);
-  }
-
-  .building-item {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 0.8rem;
-    padding: 0.8rem 0;
-    border-bottom: 1px dashed rgba(167, 192, 128, 0.3);
-    transition: var(--transition-smooth);
-    text-align: left;
-  }
-
-  .building-item:last-child {
-    border-bottom: none;
-  }
-
-  .building-item:hover {
-    transform: translateX(3px);
-  }
-
-  .building-status {
-    width: 0.8rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 0.48rem;
-  }
-
-  .status-dot {
-    display: block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #c9e7a1;
-    box-shadow: 0 0 12px rgba(201, 231, 161, 0.62);
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  .building-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    align-items: flex-start;
-  }
-
-  .building-name {
-    font-size: var(--font-size-base);
-    font-weight: 400;
-    color: #d7e2b1;
-    letter-spacing: 0.03em;
-    font-family: var(--font-display);
-  }
-
-  .building-desc {
-    font-size: var(--font-size-small);
-    color: #9aab8f;
-    line-height: 1.55;
-    font-weight: 500;
-  }
-
   .section .container :global(.contact-section) {
     width: min(100%, 62rem);
     margin-left: 0;
@@ -672,7 +845,7 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
     }
 
     .section .container {
-      padding: 0;
+      padding: 0 var(--container-padding);
     }
 
     .highlights-grid {
@@ -682,6 +855,10 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
 
     .about-content p {
       font-size: var(--font-size-xs);
+    }
+
+    .about-content {
+      width: 100%;
     }
 
     .contribution-grid {
@@ -695,13 +872,12 @@ const contributionTotal = contributions.reduce((sum, day) => sum + day.count, 0)
       gap: 0.35rem;
     }
 
-    .highlight-card,
-    .building-item {
-      padding: 0.72rem;
+    .preview-header {
+      margin-bottom: 0.45rem;
     }
 
-    .building-item {
-      padding: 0.72rem 0;
+    .highlight-card {
+      padding: 0.72rem;
     }
   }
 </style>

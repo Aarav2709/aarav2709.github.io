@@ -5,11 +5,26 @@ interface Props {
   tech: string[];
   github?: string;
   live?: string;
+  previewImage?: string;
+  previewAlt?: string;
   stars?: number;
   index: number;
 }
 
-const { title, description, tech, github, live, stars, index } = Astro.props;
+const {
+  title,
+  description,
+  tech,
+  github,
+  live,
+  previewImage,
+  previewAlt,
+  stars,
+  index,
+} = Astro.props;
+
+const resolvedPreview = previewImage;
+const resolvedPreviewAlt = previewAlt ?? `${title} screenshot`;
 ---
 
 <div class="project slide-up" style={`animation-delay: ${index * 0.08}s`}>
@@ -68,6 +83,21 @@ const { title, description, tech, github, live, stars, index } = Astro.props;
               </svg>
               <span class="star-count">{stars ?? 0}</span>
             </span>
+          )
+        }
+        {
+          resolvedPreview && (
+            <button
+              type="button"
+              class="project-link preview-trigger"
+              data-preview-open
+              data-preview-src={resolvedPreview}
+              data-preview-alt={resolvedPreviewAlt}
+              data-preview-title={`${title} preview`}
+              aria-label={`Open preview for ${title}`}
+            >
+              preview
+            </button>
           )
         }
       </div>
@@ -186,6 +216,12 @@ const { title, description, tech, github, live, stars, index } = Astro.props;
     border-bottom: 1px dashed rgba(167, 192, 128, 0.45);
     background: none;
     transition: var(--transition-smooth);
+  }
+
+  button.project-link {
+    appearance: none;
+    cursor: pointer;
+    line-height: 1;
   }
 
   .project-link:hover {
