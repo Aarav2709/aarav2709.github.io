@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import { fileURLToPath } from 'url';
 
 export default defineConfig({
-  site: 'https://aarus2709.me',
+  site: 'http://aarav2709.github.io/',
   base: '/',
   output: 'static',
   compressHTML: true,
