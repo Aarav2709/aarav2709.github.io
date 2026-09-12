@@ -9,6 +9,8 @@ Hey everyone, and welcome to my first ever blog! In this blog, I'm gonna show yo
 
 The main idea behind my portfolio was not to use any template, but instead, make my portfolio so good that people get inspired and use it as a template. I wanted to bring my own life into the portfolio rather than just using templates, because that felt easy and boring. Sounds bad, right?
 
+---
+
 ## What to do after making a portfolio? What do I add?
 
 This was one of the major questions in my mind, that if I'm making a portfolio, then why should I even make it?
@@ -29,7 +31,7 @@ So I drafted some pointers initially, and they were:
 ## Timeline
 
 ### May 2025, Initial Drafts
-And thus, I made a new repo named ~~AarusPortfolio~~. Now that I'm broke, it's aarav2709.github.io xD
+And thus, I made a new repo named ~~AarusPortfolio~~. Now that I'm broke, it's aarav2709.github.io xD!
 
 As I was and am pretty good at web development, I decided to keep things not too tough, just Vanilla HTML, CSS and JS to start things up. With my first line being most of our first lines:
 ```html
@@ -176,4 +178,4 @@ The biggest improvement wasn't switching frameworks. It was understanding why I 
 
 ## Well, that's it.
 
-Never knew writing blogs could be this fun too! I hope you did enjoy reading this, though even with Typing Speed of around 150WPM, this still took me 2 hours to write since you know, we need THOSE EMOTIONS, lol. Anyways, enjoy your day, love you all : D
+Never knew writing blogs could be this fun too! I hope you did enjoy reading this, though even with Typing Speed of around 150WPM, this still took me 2 hours to write since you know, we need THOSE EMOTIONS, lol. Anyways, enjoy your day, love you all!
