@@ -1,7 +1,8 @@
 ---
 title: "OddEven-SP"
-description: "OddEven-SP, also known as Odd Even: Singleplayer was my first ever OPEN SOURCED project, written in python. It's a hand cricket type of game, absurdly famous in my school!"
+description: "Odd Even: Singleplayer, my first open source project. A hand cricket game in Python that got absurdly popular at my school."
 tech:
   - Python
 github: "https://github.com/Aarav2709/OddEven-SP"
+order: 13
 ---

@@ -19,6 +19,7 @@
     "rehype-pretty-code": "^0.14.5",
     "remark-directive": "^4.0.0",
     "remark-gfm": "^4.0.1",
+    "sharp": "^0.35.3",
     "shiki": "^4.3.1"
   }
 }

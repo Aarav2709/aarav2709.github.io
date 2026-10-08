@@ -1,116 +1,116 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { getAge } from "../utils/age";
 ---
 
-<Layout title="About | AarusPortfolio">
+<Layout
+  title="About | AarusPortfolio"
+  description="How Aarav went from Linux at 5 and Scratch at 9 to Roblox games, open source, and web development."
+>
   <main id="main-content" class="page">
-    <section class="about">
-      <div class="content">
+    <PageHeader title="About me" />
 
-        <h1 class="reveal">
-          About me
-        </h1>
+    <section class="content">
+      <p class="reveal">
+        Hey, I'm Aarav. I'm a {getAge()} year old developer who loves creating
+        things with code.
+      </p>
 
-        <p class="reveal">
-          Hey, I'm Aarav. I'm a 15 year old developer who loves creating
-          things with code.
-        </p>
+      <p class="reveal">
+        I have always been curious about how things work. Whether it is
+        software, computers, games, aircraft, or space, I enjoy understanding
+        the little details behind the things around me.
+      </p>
 
-        <p class="reveal">
-          I have always been curious about how things work. Whether it is
-          software, computers, games, aircraft, or space, I enjoy understanding
-          the little details behind the things around me.
-        </p>
+      <h2 class="reveal">
+        How it started
+      </h2>
 
-        <h2 class="reveal">
-          How it started
-        </h2>
+      <p class="reveal">
+        My interest in computers started when I was around 5 years old.
+        My uncle introduced me to computers and showed me the basics of Linux
+        and how computers worked. I was fascinated by the fact that a machine
+        could be controlled, customized, and used to create almost anything.
+      </p>
 
-        <p class="reveal">
-          My interest in computers started when I was around 5 years old.
-          My uncle introduced me to computers and showed me the basics of Linux
-          and how computers worked. I was fascinated by the fact that a machine
-          could be controlled, customized, and used to create almost anything.
-        </p>
+      <p class="reveal">
+        A few years later, when I was 9, I started programming with Scratch.
+        What started as making simple animations and small projects slowly
+        became something much bigger. I spent a lot of time experimenting,
+        learning, and trying to create things that were actually fun to use.
+      </p>
 
-        <p class="reveal">
-          A few years later, when I was 9, I started programming with Scratch.
-          What started as making simple animations and small projects slowly
-          became something much bigger. I spent a lot of time experimenting,
-          learning, and trying to create things that were actually fun to use.
-        </p>
+      <h2 class="reveal">
+        From games to software
+      </h2>
 
-        <h2 class="reveal">
-          From games to software
-        </h2>
+      <p class="reveal">
+        After Scratch started feeling limiting, I started exploring game
+        development. I got into Roblox Studio and began learning how games
+        were made, from designing environments to writing scripts and
+        creating complete experiences.
+      </p>
 
-        <p class="reveal">
-          After Scratch started feeling limiting, I started exploring game
-          development. I got into Roblox Studio and began learning how games
-          were made, from designing environments to writing scripts and
-          creating complete experiences.
-        </p>
+      <p class="reveal">
+        Game development taught me a lot about creativity, patience, and
+        problem solving. It showed me that programming was not just about
+        writing code, but about turning ideas into something other people
+        can interact with.
+      </p>
 
-        <p class="reveal">
-          Game development taught me a lot about creativity, patience, and
-          problem solving. It showed me that programming was not just about
-          writing code, but about turning ideas into something other people
-          can interact with.
-        </p>
+      <p class="reveal">
+        Later, I started exploring programming outside of games. I learned
+        Python, started sharing my work on GitHub, and moved into web
+        development. Since then, I have enjoyed building websites,
+        experimenting with new technologies, and creating projects that solve
+        problems or simply exist because I wanted to make them.
+      </p>
 
-        <p class="reveal">
-          Later, I started exploring programming outside of games. I learned
-          Python, started sharing my work on GitHub, and moved into web
-          development. Since then, I have enjoyed building websites,
-          experimenting with new technologies, and creating projects that solve
-          problems or simply exist because I wanted to make them.
-        </p>
+      <h2 class="reveal">
+        What I build
+      </h2>
 
-        <h2 class="reveal">
-          What I build
-        </h2>
+      <p class="reveal">
+        I enjoy building things across different areas. Most of my projects
+        are around web development, game development, and experiments where I
+        get to learn something new.
+      </p>
 
-        <p class="reveal">
-          I enjoy building things across different areas. Most of my projects
-          are around web development, game development, and experiments where I
-          get to learn something new.
-        </p>
+      <p class="reveal">
+        I like researching before starting projects, understanding how things
+        work, and then putting my own ideas into them. The process of learning
+        something and then creating something with it is probably my favourite
+        part of programming.
+      </p>
 
-        <p class="reveal">
-          I like researching before starting projects, understanding how things
-          work, and then putting my own ideas into them. The process of learning
-          something and then creating something with it is probably my favourite
-          part of programming.
-        </p>
+      <h2 class="reveal">
+        Outside of coding
+      </h2>
 
-        <h2 class="reveal">
-          Outside of coding
-        </h2>
+      <p class="reveal">
+        Programming is a huge part of my life, but I have plenty of other
+        interests too.
+      </p>
 
-        <p class="reveal">
-          Programming is a huge part of my life, but I have plenty of other
-          interests too.
-        </p>
+      <p class="reveal">
+        I am a huge aviation and astrophysics nerd. I can spend hours reading
+        about aircraft, space, and everything happening beyond our planet. I
+        also enjoy reading books, especially science fiction and fiction.
+      </p>
 
-        <p class="reveal">
-          I am a huge aviation and astrophysics nerd. I can spend hours reading
-          about aircraft, space, and everything happening beyond our planet. I
-          also enjoy reading books, especially science fiction and fiction.
-        </p>
+      <p class="reveal">
+        When I am not coding, I am usually solving cubes, improving my typing
+        speed, or falling into random rabbit holes about technology, science,
+        and how things work.
+      </p>
 
-        <p class="reveal">
-          When I am not coding, I am usually solving cubes, improving my typing
-          speed, or falling into random rabbit holes about technology, science,
-          and how things work.
-        </p>
+      <p class="reveal">
+        I build things because I genuinely enjoy it. Learning something new
+        is exciting, but taking that knowledge and creating something of my
+        own is even better.
+      </p>
 
-        <p class="reveal">
-          I build things because I genuinely enjoy it. Learning something new
-          is exciting, but taking that knowledge and creating something of my
-          own is even better.
-        </p>
-
-      </div>
     </section>
   </main>
 </Layout>
@@ -118,61 +118,38 @@ import Layout from "../layouts/Layout.astro";
 <style>
 .page {
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding: 8rem var(--container-padding) 4rem;
+  padding: 8rem var(--container-padding) 5rem;
 }
 
 .content {
-  max-width: 52rem;
-  width: 100%;
-  text-align: center;
-}
-
-h1 {
-  font-size: clamp(3rem, 7vw, 5rem);
-  color: var(--accent-color);
-  margin-bottom: 3rem;
+  max-width: var(--content-width);
+  margin: 0 auto;
 }
 
 h2 {
-  margin-top: 3.5rem;
-  margin-bottom: 1.2rem;
-  color: var(--primary-text);
-  font-size: var(--section-size);
+  margin: 3rem 0 0.8rem;
+  color: var(--accent-color);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
 }
 
 p {
+  margin-bottom: 1.1rem;
+  color: var(--primary-text);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+p:first-of-type {
   color: var(--secondary-text);
-  font-size: var(--font-size-large);
-  line-height: 1.9;
-  margin-bottom: 1.4rem;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(35px);
-  transition:
-    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+  font-size: 1.25rem;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {
   .page {
-    padding-top: 6rem;
-  }
-
-  .content {
-    text-align: left;
-  }
-
-  h1 {
-    text-align: center;
+    padding-top: 6.5rem;
   }
 }
 </style>

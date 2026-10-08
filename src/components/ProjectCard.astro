@@ -9,10 +9,7 @@ interface Props {
     text: string;
     url: string;
   }[];
-  previewImage?: string;
-  previewAlt?: string;
   stars?: number;
-  index: number;
 }
 
 const {
@@ -22,170 +19,108 @@ const {
   github,
   live,
   buttons = [],
-  previewImage,
-  previewAlt,
   stars = 0,
-  index,
 } = Astro.props;
 
-const resolvedPreviewAlt = previewAlt ?? `${title} preview`;
+const links = [
+  ...(github ? [{ text: "Source", url: github }] : []),
+  ...(live ? [{ text: "Live", url: live }] : []),
+  ...buttons,
+];
 ---
 
-<article
-  class="project reveal"
-  style={`transition-delay:${index * 80}ms`}
->
-  {previewImage && (
-    <div class="preview">
-      <img src={previewImage} alt={resolvedPreviewAlt} />
-    </div>
-  )}
-
-  <div class="project-content">
-    <div class="project-tech">
-      {tech.join(" • ")}
-    </div>
-
+<article class="surface project reveal">
+  <div class="top">
     <h2>{title}</h2>
+    {github && (
+      <p class="stars" aria-label={`${stars} GitHub ${stars === 1 ? "star" : "stars"}`}>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M12 2.8l2.84 5.75 6.35.92-4.6 4.48 1.09 6.32L12 17.29l-5.68 2.98 1.09-6.32-4.6-4.48 6.35-.92L12 2.8Z" />
+        </svg>
+        {stars}
+      </p>
+    )}
+  </div>
 
-    <p>{description}</p>
+  <p class="description">{description}</p>
 
-    <div class="project-links">
-      {github && (
-        <a href={github} target="_blank" rel="noopener noreferrer">
-          Source ↗
-        </a>
-      )}
+  <div class="bottom">
+    <ul class="tech" aria-label="Built with">
+      {tech.map((item) => <li class="tag">{item}</li>)}
+    </ul>
 
-      {live && (
-        <a href={live} target="_blank" rel="noopener noreferrer">
-          Live ↗
-        </a>
-      )}
-
-      {buttons.map((button) => (
-        <a
-          href={button.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {button.text} ↗
+    <div class="links">
+      {links.map((link) => (
+        <a href={link.url} target="_blank" rel="noopener noreferrer" class="button ext">
+          {link.text}
         </a>
       ))}
-
-      {github && (
-        <span class="stars">
-          ★ {stars}
-        </span>
-      )}
-
-      {previewImage && (
-        <button
-          type="button"
-          class="preview-button"
-          data-preview-open
-          data-preview-src={previewImage}
-          data-preview-alt={resolvedPreviewAlt}
-          data-preview-title={`${title} preview`}
-        >
-          Preview
-        </button>
-      )}
     </div>
   </div>
 </article>
 
 <style>
 .project {
-  padding: 3rem 0;
-  border-bottom: 1px solid var(--border-color);
-  transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.35s ease;
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.4rem 1.5rem;
 }
 
-.project:hover {
-  border-color: var(--accent-color);
-}
-
-.project:hover .project-content {
-  transform: translateX(8px);
-}
-
-.preview {
-  margin-bottom: 1.5rem;
-}
-
-.preview img {
-  width: 100%;
-  max-height: 350px;
-  object-fit: cover;
-  border-radius: 1rem;
-}
-
-.project-content {
-  max-width:55rem;
-  margin:0 auto;
-  text-align:center;
-  transition:transform .35s cubic-bezier(0.22,1,0.36,1);
-}
-
-.project-tech {
-  font-size:0.85rem;
-  font-weight:500;
-  letter-spacing:0.05em;
-  color:var(--tertiary-text);
-  margin-bottom:1rem;
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.3rem 1rem;
 }
 
 h2 {
-  margin:0;
-  color:var(--primary-text);
-  font-size:clamp(1.5rem,3vw,2rem);
-  font-weight:500;
-  line-height:1.2;
-}
-
-p {
-  margin:1rem auto 0;
-  color:var(--secondary-text);
-  line-height:1.7;
-  max-width:48rem;
-}
-
-.project-links {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:1rem;
-  margin-top:1.5rem;
-  flex-wrap:wrap;
-}
-
-.project-links a,
-.preview-button {
-  color:var(--primary-text);
-  font-size:0.9rem;
-  text-decoration:none;
-  background:none;
-  border:none;
-  cursor:pointer;
-  transition:color .25s ease;
-}
-
-.project-links a:hover,
-.preview-button:hover {
-  color:var(--accent-color);
+  color: var(--accent-color);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
 }
 
 .stars {
-  color:var(--secondary-text);
-  font-size:0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--tertiary-text);
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
-@media(max-width:768px) {
-  .project {
-    padding:2rem 0;
-  }
+.stars svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--yellow);
+}
+
+.description {
+  color: var(--secondary-text);
+  line-height: 1.65;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.tech,
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  list-style: none;
+}
+
+.links .button {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
 }
 </style>

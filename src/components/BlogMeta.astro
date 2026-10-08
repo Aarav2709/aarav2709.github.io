@@ -1,27 +1,16 @@
 ---
+import { formatDate } from "../utils/blog";
+
 interface Props {
   date: Date;
+  minutes: number;
 }
 
-const { date } = Astro.props;
-const formatDate = (value: Date) =>
-  new Intl.DateTimeFormat("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(value);
+const { date, minutes } = Astro.props;
 ---
 
-<div class="blogMeta">
+<p class="muted">
   <time datetime={date.toISOString()}>{formatDate(date)}</time>
-</div>
-
-<style>
-.blogMeta {
-  margin-top: 1.5rem;
-  color: var(--secondary-text);
-  font-size: 0.94rem;
-  text-align: center;
-}
-</style>
+  <span aria-hidden="true"> · </span>
+  {minutes} min read
+</p>

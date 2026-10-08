@@ -1,34 +1,13 @@
-interface GitHubRepo {
-  owner: string;
-  repo: string;
+export interface RepoStats {
+  stars: number;
 }
 
-interface GitHubResponse {
-  stargazers_count: number;
-}
+const USER_AGENT = "AarusPortfolio";
 
-interface ContributionResponse {
-  contributions: GitHubContribution[];
-}
-
-export interface GitHubContribution {
-  date: string;
-  count: number;
-  level: number;
-}
-
-function parseGitHubRepo(githubUrl: string): GitHubRepo | null {
+function parseGitHubRepo(githubUrl: string) {
   try {
-    const url = new URL(githubUrl);
-    const parts = url.pathname.split("/").filter(Boolean);
-    if (parts.length < 2) {
-      return null;
-    }
-
-    return {
-      owner: parts[0],
-      repo: parts[1],
-    };
+    const [owner, repo] = new URL(githubUrl).pathname.split("/").filter(Boolean);
+    return owner && repo ? { owner, repo } : null;
   } catch {
     return null;
   }
@@ -36,158 +15,72 @@ function parseGitHubRepo(githubUrl: string): GitHubRepo | null {
 
 function parseCompactNumber(value: string): number | null {
   const normalized = value.trim().toLowerCase().replace(/,/g, "");
-  if (!normalized) {
-    return null;
-  }
+  const multiplier = normalized.endsWith("k") ? 1_000 : normalized.endsWith("m") ? 1_000_000 : 1;
+  const parsed = Number.parseFloat(multiplier === 1 ? normalized : normalized.slice(0, -1));
 
-  if (normalized.endsWith("k")) {
-    const base = Number.parseFloat(normalized.slice(0, -1));
-    return Number.isFinite(base) ? Math.round(base * 1000) : null;
-  }
-
-  if (normalized.endsWith("m")) {
-    const base = Number.parseFloat(normalized.slice(0, -1));
-    return Number.isFinite(base) ? Math.round(base * 1_000_000) : null;
-  }
-
-  const parsed = Number.parseInt(normalized, 10);
-  return Number.isFinite(parsed) ? parsed : null;
+  return Number.isFinite(parsed) ? Math.round(parsed * multiplier) : null;
 }
 
-async function getStarsFromGitHubApi(owner: string, repo: string): Promise<number | null> {
+async function fromGitHubApi(owner: string, repo: string): Promise<RepoStats | null> {
   const token = process.env.GITHUB_TOKEN;
 
   try {
     const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
       headers: {
         Accept: "application/vnd.github+json",
-        "User-Agent": "AarusPortfolio",
+        "User-Agent": USER_AGENT,
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
     });
 
-    if (!response.ok) {
-      return null;
-    }
+    if (!response.ok) return null;
 
-    const data: GitHubResponse = await response.json();
-    const stars = Number(data.stargazers_count ?? 0);
-    return Number.isFinite(stars) ? stars : null;
+    const data: { stargazers_count?: number } = await response.json();
+
+    return { stars: Number(data.stargazers_count ?? 0) };
   } catch {
     return null;
   }
 }
 
-async function getStarsFromShields(owner: string, repo: string): Promise<number | null> {
+async function fromShields(owner: string, repo: string): Promise<RepoStats | null> {
   try {
-    const response = await fetch(
-      `https://img.shields.io/github/stars/${owner}/${repo}?style=social`,
-      {
-        headers: {
-          "User-Agent": "AarusPortfolio",
-        },
-      },
-    );
+    const response = await fetch(`https://img.shields.io/github/stars/${owner}/${repo}?style=social`, {
+      headers: { "User-Agent": USER_AGENT },
+    });
 
-    if (!response.ok) {
-      return null;
-    }
+    if (!response.ok) return null;
 
     const svg = await response.text();
-    const direct = svg.match(/id="rlink"[^>]*>\s*([^<]+)\s*<\/text>/i);
-    const fallback = svg.match(/<text[^>]*>\s*([0-9.,]+[kKmM]?)\s*<\/text>/g);
+    const value =
+      svg.match(/id="rlink"[^>]*>\s*([^<]+)\s*<\/text>/i)?.[1] ??
+      [...svg.matchAll(/<text[^>]*>\s*([0-9.,]+[kKmM]?)\s*<\/text>/g)].at(-1)?.[1];
+    const stars = value ? parseCompactNumber(value) : null;
 
-    if (direct?.[1]) {
-      return parseCompactNumber(direct[1]);
-    }
-
-    if (fallback?.length) {
-      const last = fallback[fallback.length - 1].match(/>\s*([^<]+)\s*<\//);
-      if (last?.[1]) {
-        return parseCompactNumber(last[1]);
-      }
-    }
-
-    return null;
+    return stars === null ? null : { stars };
   } catch {
     return null;
   }
 }
 
-export async function getGitHubStars(githubUrl: string): Promise<number> {
+export async function getRepoStats(githubUrl: string): Promise<RepoStats> {
   const parsed = parseGitHubRepo(githubUrl);
-  if (!parsed) {
-    return 0;
+  if (!parsed) return { stars: 0 };
+
+  const stats = (await fromGitHubApi(parsed.owner, parsed.repo)) ?? (await fromShields(parsed.owner, parsed.repo));
+
+  if (!stats) {
+    console.warn(`Failed to fetch stats for ${parsed.owner}/${parsed.repo}.`);
   }
 
-  const { owner, repo } = parsed;
-
-  const apiStars = await getStarsFromGitHubApi(owner, repo);
-  if (apiStars !== null) {
-    return apiStars;
-  }
-
-  const fallbackStars = await getStarsFromShields(owner, repo);
-  if (fallbackStars !== null) {
-    return fallbackStars;
-  }
-
-  console.warn(`Failed to fetch stars for ${owner}/${repo} from all sources.`);
-  return 0;
+  return stats ?? { stars: 0 };
 }
 
-export async function getGitHubContributions(username: string): Promise<GitHubContribution[]> {
-  try {
-    const response = await fetch(
-      `https://github-contributions-api.jogruber.de/v4/${username}?y=last`,
-      {
-        headers: {
-          "User-Agent": "AarusPortfolio",
-        },
-      },
-    );
-
-    if (!response.ok) {
-      console.warn(`Failed to fetch contributions for ${username}: ${response.statusText}`);
-      return [];
-    }
-
-    const data: ContributionResponse = await response.json();
-    if (!Array.isArray(data.contributions)) {
-      return [];
-    }
-
-    return data.contributions
-      .filter((entry) => typeof entry.date === "string")
-      .map((entry) => ({
-        date: entry.date,
-        count: Number.isFinite(entry.count) ? entry.count : 0,
-        level: Number.isFinite(entry.level) ? entry.level : 0,
-      }));
-  } catch (error) {
-    console.error(`Error fetching contributions for ${username}:`, error);
-    return [];
-  }
-}
-
-export async function getAllProjectStars<
-  T extends { data: { github?: string } }
->(projects: T[]) {
-  const starsPromises = projects.map(async (project) => {
-    if (!project.data.github) {
-      return {
-        ...project,
-        stars: 0,
-      };
-    }
-
-    const stars = await getGitHubStars(project.data.github);
-
-    return {
+export function withRepoStats<T extends { data: { github?: string } }>(projects: T[]) {
+  return Promise.all(
+    projects.map(async (project) => ({
       ...project,
-      stars,
-    };
-  });
-
-  return Promise.all(starsPromises);
+      ...(project.data.github ? await getRepoStats(project.data.github) : { stars: 0 }),
+    })),
+  );
 }

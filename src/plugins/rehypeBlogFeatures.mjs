@@ -1,34 +1,62 @@
+const element = (tagName, properties = {}, children = []) => ({
+  type: "element",
+  tagName,
+  properties,
+  children,
+});
+
+const isElement = (node, tagName) => node?.type === "element" && (!tagName || node.tagName === tagName);
+
 function getText(node) {
   if (node.type === "text") {
     return node.value;
   }
 
-  if (!Array.isArray(node.children)) {
-    return "";
-  }
-
-  return node.children.map(getText).join("");
+  return Array.isArray(node.children) ? node.children.map(getText).join("") : "";
 }
 
 function addClass(node, className) {
   const current = node.properties?.className ?? [];
   const classes = Array.isArray(current) ? current : [current];
 
-  node.properties = {
-    ...node.properties,
-    className: [...classes, className],
+  node.properties = { ...node.properties, className: [...classes, className] };
+}
+
+// Mirrors github-slugger so ids match Astro's headings.
+function createSlugger() {
+  const seen = new Map();
+
+  return (text) => {
+    const base = text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\p{L}\p{M}\p{N}\p{Pc}\- ]/gu, "")
+      .replace(/ /g, "-");
+    const count = seen.get(base) ?? 0;
+
+    seen.set(base, count + 1);
+    return count ? `${base}-${count}` : base;
   };
 }
 
-function enhanceCodeBlock(node) {
-  const code = node.children?.find((child) => child.type === "element" && child.tagName === "code");
+function enhanceHeading(node, slug) {
+  const id = node.properties?.id ?? slug(getText(node));
+
+  node.properties = { ...node.properties, id };
+  node.children.push(
+    element("a", { className: ["headingAnchor"], href: `#${id}`, ariaLabel: "Link to this section" }),
+  );
+}
+
+function enhanceDiff(pre) {
+  const code = pre.children?.find((child) => isElement(child, "code"));
 
   if (code?.properties?.["data-language"] !== "diff") {
     return;
   }
 
   for (const line of code.children ?? []) {
-    if (line.type !== "element" || !("data-line" in (line.properties ?? {}))) {
+    if (!isElement(line) || !("data-line" in (line.properties ?? {}))) {
       continue;
     }
 
@@ -44,53 +72,55 @@ function enhanceCodeBlock(node) {
   }
 }
 
-function enhanceChildren(node) {
+function toFigure(image) {
+  const caption = image.properties?.title;
+  const zoom = element(
+    "button",
+    { type: "button", className: ["blogZoom"], ariaLabel: "View image full size" },
+    [image],
+  );
+
+  return element(
+    "figure",
+    { className: ["blogFigure"] },
+    typeof caption === "string" && caption
+      ? [zoom, element("figcaption", {}, [{ type: "text", value: caption }])]
+      : [zoom],
+  );
+}
+
+function enhanceChildren(node, slug) {
   if (!Array.isArray(node.children)) {
     return;
   }
 
   node.children = node.children.map((child) => {
-    enhanceChildren(child);
+    enhanceChildren(child, slug);
 
-    if (child.type === "element" && child.tagName === "pre") {
-      enhanceCodeBlock(child);
+    if (!isElement(child)) {
+      return child;
     }
 
-    if (
-      child.type === "element" &&
-      child.tagName === "p" &&
-      child.children?.length === 1 &&
-      child.children[0]?.type === "element" &&
-      child.children[0]?.tagName === "img"
-    ) {
-      const image = child.children[0];
-      const caption = image.properties?.title;
+    if (/^h[2-4]$/.test(child.tagName)) {
+      enhanceHeading(child, slug);
+    }
 
-      if (typeof caption !== "string" || caption.length === 0) {
-        return child;
-      }
+    if (child.tagName === "pre") {
+      enhanceDiff(child);
+    }
 
-      return {
-        type: "element",
-        tagName: "figure",
-        properties: {
-          className: ["blogFigure"],
-        },
-        children: [
-          image,
-          {
-            type: "element",
-            tagName: "figcaption",
-            properties: {},
-            children: [
-              {
-                type: "text",
-                value: caption,
-              },
-            ],
-          },
-        ],
-      };
+    if ("data-rehype-pretty-code-figure" in (child.properties ?? {})) {
+      child.children.push(
+        element("button", { type: "button", className: ["codeCopy"], dataCodeCopy: "" }, [
+          { type: "text", value: "Copy" },
+        ]),
+      );
+    }
+
+    const onlyChild = child.children?.length === 1 ? child.children[0] : null;
+
+    if (child.tagName === "p" && isElement(onlyChild, "img")) {
+      return toFigure(onlyChild);
     }
 
     return child;
@@ -99,6 +129,6 @@ function enhanceChildren(node) {
 
 export default function rehypeBlogFeatures() {
   return (tree) => {
-    enhanceChildren(tree);
+    enhanceChildren(tree, createSlugger());
   };
 }

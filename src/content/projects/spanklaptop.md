@@ -1,7 +1,8 @@
 ---
 title: "SpankLaptop"
-description: "Hit your laptop when you get angry, and it will make funny noises, which is definitely gonna make you laugh xD! Inspired by the original project, spank."
+description: "Hit your laptop when you're angry and it makes funny noises. Guaranteed to make you laugh. Inspired by the original spank project."
 tech:
   - Rust
 github: "https://github.com/Aarav2709/SpankLaptop"
+order: 11
 ---

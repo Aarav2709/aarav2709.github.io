@@ -1,8 +1,12 @@
 ---
 title: "Fun Run 2: Reborn"
-description: "The FR2 Reborn Project, being led by me, is also a WIP, and again being recreated from the scratch all over again using Modern Tech and Brand New Systems!"
+description: "A from-scratch recreation of Fun Run 2 with modern tech and brand new systems, led by me. Work in progress."
 tech:
   - Lua
   - Solar2D
 github: "https://github.com/Aarav2709/FR2-Reborn"
+buttons:
+  - text: "Download"
+    url: "https://github.com/Aarav2709/FR2-Reborn/releases/latest"
+order: 6
 ---

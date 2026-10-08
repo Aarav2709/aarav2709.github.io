@@ -1,0 +1,67 @@
+---
+import { socials } from "../utils/icons";
+
+const year = new Date().getFullYear();
+const links = [socials.github, socials.linkedin, socials.email, socials.rss];
+---
+
+<footer class="siteFooter">
+  <ul>
+    {links.map((link) => (
+      <li>
+        <a
+          href={link.url}
+          aria-label={link.name}
+          title={link.name}
+          {...(link.url.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d={link.icon} /></svg>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <p class="muted">© {year} Aarav Gupta</p>
+</footer>
+
+<style>
+.siteFooter {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2rem var(--container-padding) 2.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+ul {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+a {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  color: var(--tertiary-text);
+  transition: background-color 0.2s ease, color 0.2s ease, transform var(--spring);
+}
+
+a:hover {
+  background: var(--surface-hover);
+  color: var(--accent-color);
+}
+
+a:active {
+  transform: var(--active);
+}
+
+svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+</style>

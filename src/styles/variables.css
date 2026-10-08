@@ -1,65 +1,113 @@
+/* Dark (Everforest) is the default theme. */
 :root {
+  color-scheme: dark;
+
   --accent-color: #a7c080;
   --accent-strong: #b5d691;
+  --accent-hover: #c9e7a3;
   --accent-soft: rgba(167, 192, 128, 0.22);
-  --accent-color-alpha: rgba(167, 192, 128, 0.2);
+  --aqua: #83c092;
+  --red: #e67e80;
+  --yellow: #dbbc7f;
 
   --bg-color: #232d31;
   --bg-elevated: #2c373b;
-  --bg-panel: rgba(46, 57, 62, 0.88);
   --bg-panel-strong: #344147;
+  --code-bg: #1b2225;
 
-  --fg-color: #e2dbc8;
   --primary-text: #e2dbc8;
   --secondary-text: #9fb191;
-  --tertiary-text: #889a81;
+  --tertiary-text: #95a68c;
 
   --border-color: rgba(167, 192, 128, 0.2);
-  --hover-bg: rgba(167, 192, 128, 0.12);
+  --glass-bg: rgba(35, 45, 49, 0.72);
+  --surface: rgba(167, 192, 128, 0.06);
+  --surface-hover: rgba(167, 192, 128, 0.12);
+  --accent-alpha: rgba(167, 192, 128, 0.16);
+  --on-accent: #1e2629;
 
-  --glass-bg: rgba(35, 45, 49, 0.76);
+  --glow-1: rgba(167, 192, 128, 0.18);
+  --glow-2: rgba(127, 187, 179, 0.14);
+  --pattern-color: rgba(167, 192, 128, 0.17);
+  --stripe-color: rgba(167, 192, 128, 0.06);
 
-  --edge-highlight: inset 0 1px 0 rgba(233, 236, 210, 0.06);
-  --shadow-glass: 0 10px 28px rgba(17, 23, 24, 0.48);
-  --shadow: 0 4px 10px rgba(17, 23, 24, 0.35);
-  --shadow-raised: 0 22px 40px rgba(17, 23, 24, 0.52);
-  --pixel-shadow: none;
+  --cursor-dot: #eefbcf;
+  --cursor-glow: rgba(232, 247, 194, 0.66);
+  --cursor-ring: rgba(181, 214, 145, 0.58);
+  --cursor-ring-active: rgba(232, 247, 194, 0.75);
+  --cursor-blend: screen;
 
-  /* Typography */
-  --font-family: "Satoshi", sans-serif;
-  --font-display: "Satoshi", sans-serif;
-  --font-hand: "Satoshi", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --edge-highlight: inset 0 1px 0 rgba(233, 236, 210, 0.07);
+  --shadow: 0 1px 2px rgba(10, 14, 15, 0.22), 0 4px 12px rgba(10, 14, 15, 0.16);
+  --shadow-raised: 0 2px 4px rgba(10, 14, 15, 0.22), 0 12px 28px rgba(10, 14, 15, 0.3);
+  --blur: blur(14px) saturate(160%);
 
-  --hero-size: clamp(3.8rem, 10vw, 8rem);
+  --font-family: "Satoshi", system-ui, sans-serif;
+  --font-display: "Satoshi", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "Cascadia Code", Consolas, monospace;
+
   --section-size: clamp(1.65rem, 3.5vw, 2.3rem);
-  --text-size: clamp(1rem, 1.5vw, 1.15rem);
 
-  --font-size-xs: 0.76rem;
-  --font-size-small: 0.92rem;
   --font-size-base: 1rem;
-  --font-size-large: 1.125rem;
-  --font-size-x-large: 1.5rem;
-  --font-size-xx-large: 2.25rem;
-  --font-size-xxx-large: 3.5rem;
 
   --container-max: 64rem;
+  --content-width: 46rem;
   --container-padding: 2rem;
-
-  --section-padding: 5.5rem 0;
 
   --rounded-corner: 1rem;
   --rounded-corner-small: 0.65rem;
 
   --transition-smooth: all 0.24s cubic-bezier(0.22, 1, 0.36, 1);
-  --transition-bounce: all 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+  --spring: 0.35s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+  --active: scale(0.97);
+}
 
-  --blur: saturate(1.5) blur(0.85rem);
+/* Light "paper" theme. */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --accent-color: #4d7030;
+  --accent-strong: #3f5f25;
+  --accent-hover: #2f4a1a;
+  --accent-soft: rgba(77, 112, 48, 0.18);
+  --aqua: #2f7d5f;
+  --red: #b8423a;
+  --yellow: #8a6500;
+
+  --bg-color: #eef0e2;
+  --bg-elevated: #e8eadb;
+  --bg-panel-strong: #dde2cb;
+  --code-bg: #1f2a24;
+
+  --primary-text: #2a3527;
+  --secondary-text: #4c5c45;
+  --tertiary-text: #5c6b54;
+
+  --border-color: rgba(77, 112, 48, 0.22);
+  --glass-bg: rgba(246, 247, 238, 0.75);
+  --surface: rgba(77, 112, 48, 0.06);
+  --surface-hover: rgba(77, 112, 48, 0.11);
+  --accent-alpha: rgba(77, 112, 48, 0.14);
+  --on-accent: #f4f5ec;
+
+  --glow-1: rgba(143, 176, 95, 0.12);
+  --glow-2: rgba(53, 167, 124, 0.06);
+  --pattern-color: rgba(77, 112, 48, 0.18);
+  --stripe-color: rgba(77, 112, 48, 0.03);
+
+  --cursor-dot: #3f5f25;
+  --cursor-glow: rgba(77, 112, 48, 0.35);
+  --cursor-ring: rgba(77, 112, 48, 0.55);
+  --cursor-ring-active: rgba(63, 95, 37, 0.8);
+  --cursor-blend: normal;
+
+  --edge-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --shadow: 0 1px 2px rgba(60, 72, 40, 0.08), 0 4px 12px rgba(60, 72, 40, 0.06);
+  --shadow-raised: 0 2px 4px rgba(60, 72, 40, 0.08), 0 12px 28px rgba(60, 72, 40, 0.12);
 }
 
 @media (max-width: 768px) {
   :root {
     --container-padding: 1.25rem;
-    --section-padding: 3.5rem 0;
   }
 }

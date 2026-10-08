@@ -2,57 +2,67 @@
 import "../styles/global.css";
 import NavBar from "../components/NavBar.astro";
 import CustomCursor from "../components/CustomCursor.astro";
+import Footer from "../components/Footer.astro";
+import { getAge } from "../utils/age";
 
 interface Props {
   title?: string;
   description?: string;
+  type?: "website" | "article";
 }
 
 const {
   title = "AarusPortfolio",
-  description = "15 year old developer building software, games, and web experiences with Go, TypeScript, Lua, and Python.",
+  description = `${getAge()} year old developer building software, games, and web experiences with Go, TypeScript, Lua, and Python.`,
+  type = "website",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og.png", Astro.site);
+const isHome = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
-    <script
-      defer
-      src="https://cloud.umami.is/script.js"
-      data-website-id="a57c9b79-c0d0-48fd-b98c-9e083aac446b">
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      document.documentElement.classList.add("js");
+      try {
+        if (localStorage.getItem("theme") === "light") document.documentElement.dataset.theme = "light";
+      } catch {}
+    </script>
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" type="application/rss+xml" title="AarusPortfolio Blog" href="/rss.xml" />
+    <link rel="preload" href="/fonts/Satoshi-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Satoshi-Bold.woff2" as="font" type="font/woff2" crossorigin />
 
     <title>{title}</title>
 
     <meta name="description" content={description} />
     <meta name="author" content="Aarav Gupta" />
-    <meta
-      name="keywords"
-      content="Aarav Gupta, developer, Go, TypeScript, Python, Lua, open source"
-    />
 
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#232d31" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="AarusPortfolio" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AarusPortfolio by Aarav Gupta" />
 
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:creator" content="@Aarav2709" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:creator" content="@Aarav2709" />
 
     <script
       defer
@@ -66,7 +76,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "@context": "https://schema.org",
         "@type": "Person",
         name: "Aarav Gupta",
-        url: "https://aarus2709.me/",
+        url: Astro.site?.toString(),
         sameAs: [
           "https://github.com/Aarav2709",
           "https://linkedin.com/in/aarav2709",
@@ -93,37 +103,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <slot />
 
+    {!isHome && <Footer />}
+
     <script>
       import "../scripts/smoothScroll";
 
-      document.documentElement.setAttribute("data-theme", "dark");
-
-      try {
-        localStorage.setItem("theme", "dark");
-      } catch {}
+      const STAGGER_MS = 80;
+      const MAX_STAGGER_STEPS = 5;
 
       function initReveal() {
-        const elements = document.querySelectorAll(".reveal");
+        const elements = document.querySelectorAll<HTMLElement>(".reveal");
 
         if (!("IntersectionObserver" in window)) {
-          elements.forEach((element) => {
-            element.classList.add("visible");
-          });
-
+          elements.forEach((element) => element.classList.add("visible"));
           return;
         }
 
-        elements.forEach((element, index) => {
-          (element as HTMLElement).style.transitionDelay = `${index * 80}ms`;
-        });
-
         const observer = new IntersectionObserver(
           (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-              }
+            // Stagger only elements that appear together.
+            const appearing = entries.filter((entry) => entry.isIntersecting);
+
+            appearing.forEach((entry, index) => {
+              const element = entry.target as HTMLElement;
+              const step = Math.min(index, MAX_STAGGER_STEPS);
+
+              element.style.transitionDelay = `${step * STAGGER_MS}ms`;
+              element.classList.add("visible");
+              observer.unobserve(element);
             });
           },
           {
@@ -131,16 +138,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           },
         );
 
-        elements.forEach((element) => {
-          observer.observe(element);
-        });
+        elements.forEach((element) => observer.observe(element));
       }
 
       initReveal();
-
-      document.addEventListener("astro:page-load", () => {
-        initReveal();
-      });
 
       console.log(
         "%c> aarav.init()",
@@ -148,7 +149,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       );
 
       console.log(
-        "%c15 yo builder. Full stack web dev. Open source enjoyer :D",
+        "%cBuilder. Full stack web dev. Open source enjoyer :D",
         "color: #888; font-family: monospace; font-size: 11px;",
       );
     </script>

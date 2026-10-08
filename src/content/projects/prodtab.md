@@ -1,12 +1,13 @@
 ---
 title: "ProdTab"
-description: "Clean firefox startpage extension written in Vanilla HTML, CSS, and JS. Made specifically for Firefox Users! Features a Clock, Greetings by Name, and a lot more! Inspired by snes19xx's browser startpage."
+description: "A clean Firefox start page extension in vanilla HTML, CSS and JS, with a clock, a greeting by name, and more. Inspired by snes19xx's browser start page."
 tech:
   - HTML
   - CSS
-  - JS
+  - JavaScript
 github: "https://github.com/Aarav2709/ProdTab"
 buttons:
   - text: "Demo"
     url: "https://prodtab.vercel.app"
+order: 7
 ---

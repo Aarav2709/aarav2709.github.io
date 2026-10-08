@@ -1,12 +1,12 @@
 ---
-title: "So.. What Happened With Needlelight?"
-description: "How I went from having absolutely no idea what I was doing, to spending seven months rebuilding everything from scratch and finally making something I'm genuinely proud of, yayy!"
+title: "So, What Happened With Needlelight?"
+description: "How I went from having absolutely no idea what I was doing, to spending seven months rebuilding everything from scratch and making something I'm proud of, yay!"
 date: 2026-09-12
 ---
 
 ## Okay, so what actually happened?
 
-Hey everyone, welcome to another blog! This one is definitely a bit different from the usual portfolio stuff, because this is about **Needlelight**, formerly known as **LumaflyV2**, and the entire mess that came with it. I have wanted to write this for a while, mostly because whenever I look back at the old screenshots I go, _uhm, bro, what was I even doing?_ lolol.
+This one is a bit different from the usual portfolio stuff. It's about **Needlelight**, formerly known as **LumaflyV2**, and the entire mess that came with it. I have wanted to write this for a while, mostly because whenever I look back at the old screenshots I go, _bro, what was I even doing?_
 
 This is not a hate post, and I am not writing this so people can go attack anyone. I have genuinely moved on from this whole thing. I just want to explain what happened from **my side**, in chronological order, including the parts where I was absolutely wrong, the parts where the criticism was fair, and the parts where I think some people went way too far.
 
@@ -28,7 +28,7 @@ So yeah. I was dumb. Not malicious, just inexperienced and very excited to build
 
 I originally forked Lumafly because I wanted to experiment with the existing launcher and adapt it towards Silksong. The repository still visibly has that fork lineage today, and I am not trying to hide it. I made a few commits, changed things around, and then renamed the project to **LumaflyV2**.
 
-![Screenshot 01, Qwerty warning about LumaflyV2](/images/blog/Needlelight/01QwertyWarns.png "Screenshot from the September 2025 discussion about LumaflyV2.")
+![Screenshot 01, Qwerty warning about LumaflyV2](./images/Needlelight/01QwertyWarns.png "Screenshot from the September 2025 discussion about LumaflyV2.")
 
 Looking back, the **name** was one of my biggest mistakes. Calling it LumaflyV2 made it sound like an official sequel or a proper continuation of Lumafly. It was not. It was a rough fork made by a 14 year old who was trying to adapt it for an ecosystem that was not really there yet.
 
@@ -36,7 +36,7 @@ The early project did not work properly either. It was mostly me changing things
 
 There were already discussions around whether a proper Silksong launcher even made sense at that point. The ecosystem had very little mature support compared to what exists now.
 
-![Screenshot 02, Silksong launcher plans](/images/blog/Needlelight/02SilksongPlans.png "Discussion about the Silksong launcher ecosystem around the start of the project.")
+![Screenshot 02, Silksong launcher plans](./images/Needlelight/02SilksongPlans.png "Discussion about the Silksong launcher ecosystem around the start of the project.")
 
 And honestly, that criticism was fair. I just did not understand it yet.
 
@@ -44,13 +44,13 @@ And honestly, that criticism was fair. I just did not understand it yet.
 
 This is where the whole thing started becoming much bigger than I expected. People started questioning the relationship between Lumafly and LumaflyV2, and eventually a pull request called **"Clarify relationship to Lumafly in the README"** was opened.
 
-![Screenshot 03, PR #1](/images/blog/Needlelight/03PR1.png "PR #1 asking for the relationship with Lumafly to be clarified.")
+![Screenshot 03, PR #1](./images/Needlelight/03PR1.png "PR #1 asking for the relationship with Lumafly to be clarified.")
 
 I agreed with the main point. My README should absolutely have been clearer. I should not have used the name LumaflyV2 in the first place, and I should have made it extremely obvious that I was not affiliated with the Lumafly maintainers.
 
 I also had not contacted the maintainers before starting the fork. That was another mistake. I knew the repository was GPLv3 licensed and understood that I was allowed to fork it under the license, but I did not understand that **"the license allows me to do this"** and **"I should probably communicate with the people involved before doing this"** are two very different things.
 
-![Screenshot 04, PR discussion](/images/blog/Needlelight/04PR1Discussion.png "Discussion around PR #1 and the relationship between Lumafly and LumaflyV2.")
+![Screenshot 04, PR discussion](./images/Needlelight/04PR1Discussion.png "Discussion around PR #1 and the relationship between Lumafly and LumaflyV2.")
 
 That is something I absolutely would handle differently today.
 
@@ -60,13 +60,15 @@ There was also criticism about attribution, and this one is another place where 
 
 I **did** credit the developers and projects I was actually referencing, and there was no secret plan to pass other people's work off as mine. But I still should have handled those images properly. I should have linked the original posts, used clearly licensed assets, or just made the assets myself.
 
-![Screenshot 05, attribution and open source discussion](/images/blog/Needlelight/05Attribution.png "Discussion about attribution, references, and open source usage.")
+![Screenshot 05, attribution and open source discussion](./images/Needlelight/05Attribution.png "Discussion about attribution, references, and open source usage.")
 
 So yes, that criticism is fair. It was a stupid oversight, and I own it.
 
 ## The AI accusations, lol
 
+:::margin
 This is probably the part where I get accused of writing this blog with AI because I am talking about AI. xD
+:::
 
 During the early C# versions, I used AI **a lot more** than I do now. I simply had less knowledge. When I got stuck on a bug or did not understand why something was happening, I would ask AI for help. Sometimes it would generate code, sometimes it would explain the issue, sometimes it would give me a fix that I then had to debug because, well, AI is AI.
 
@@ -87,7 +89,7 @@ Okay, here is another one where I am not even going to defend myself.
 
 **Yes, I asked people to star the repository.**
 
-![Screenshot 06, GitHub star discussion](/images/blog/Needlelight/06StarTalk.png "Discussion about GitHub stars and my behaviour around asking people to star the project.")
+![Screenshot 06, GitHub star discussion](./images/Needlelight/06StarTalk.png "Discussion about GitHub stars and my behaviour around asking people to star the project.")
 
 That was dumb. I was 14, I wanted people to notice what I had made, and I was treating GitHub stars like some kind of score. I should not have done that.
 
@@ -101,13 +103,13 @@ This is where the screenshots get difficult for me to look at.
 
 There were people who were actually pretty reasonable about the whole thing. Some people pointed out that my actions made more sense when you considered that I was a 14 year old with very little open source experience.
 
-![Screenshot 07, age and good faith](/images/blog/Needlelight/07AgeGoodFaith.png "Discussion considering my age and whether the project was made in good faith.")
+![Screenshot 07, age and good faith](./images/Needlelight/07AgeGoodFaith.png "Discussion considering my age and whether the project was made in good faith.")
 
-![Screenshot 08, more context](/images/blog/Needlelight/08AgeContext.png "Another discussion putting the old behaviour into context.")
+![Screenshot 08, more context](./images/Needlelight/08AgeContext.png "Another discussion putting the old behaviour into context.")
 
 And then there were comments that were considerably harsher.
 
-![Screenshot 09, self glazing discussion](/images/blog/Needlelight/09SelfGlazing.png "A harsher exchange from the old controversy.")
+![Screenshot 09, self glazing discussion](./images/Needlelight/09SelfGlazing.png "A harsher exchange from the old controversy.")
 
 People questioned my age, questioned whether I was actually a kid, made jokes about it, and generally treated the fact that I was 14 as another reason to distrust everything I had done.
 
@@ -115,13 +117,13 @@ There was even a discussion involving my Roblox Game Development certification.
 
 There were also people speculating about my social accounts and whether some of them were fake.
 
-![Screenshot 10, social speculation](/images/blog/Needlelight/10SocialSpeculation.png "Speculation around social accounts and my identity.")
+![Screenshot 10, social speculation](./images/Needlelight/10SocialSpeculation.png "Speculation around social accounts and my identity.")
 
 And some comments were just straight up insulting.
 
-![Screenshot 11, harsher comments](/images/blog/Needlelight/11HarshComments.png "Another screenshot showing some of the harsher comments from the controversy.")
+![Screenshot 11, harsher comments](./images/Needlelight/11HarshComments.png "Another screenshot showing some of the harsher comments from the controversy.")
 
-![Screenshot 12, Roblox certification](/images/blog/Needlelight/12RobloxCert.png "Discussion involving my Roblox Game Development certification and my age.")
+![Screenshot 12, Roblox certification](./images/Needlelight/12RobloxCert.png "Discussion involving my Roblox Game Development certification and my age.")
 
 I want to be careful with how I say this because I am not trying to play the victim card. I really did make mistakes. I deserved criticism for those mistakes.
 
@@ -149,15 +151,15 @@ Basically, new name, same problems. :D
 
 The controversy did not really die when the original discussion ended. A few months later, people were still revisiting it and explaining why they thought the project was problematic.
 
-![Screenshot 13, February forum discussion](/images/blog/Needlelight/13FebruaryThread.png "February 2026 discussion revisiting the original controversy.")
+![Screenshot 13, February forum discussion](./images/Needlelight/13FebruaryThread.png "February 2026 discussion revisiting the original controversy.")
 
 There were posts saying that the project should be clearly marked as unrelated to Lumafly, and discussions about whether people should use it at all.
 
-![Screenshot 14, pinned post discussion](/images/blog/Needlelight/14PinnedPost.png "Discussion around a pinned warning and how the community should describe Needlelight.")
+![Screenshot 14, pinned post discussion](./images/Needlelight/14PinnedPost.png "Discussion around a pinned warning and how the community should describe Needlelight.")
 
 There was even a pretty direct recommendation telling people not to use Needlelight.
 
-![Screenshot 15, direct recommendation](/images/blog/Needlelight/15DirectRecommendation.png "A direct community recommendation not to use Needlelight.")
+![Screenshot 15, direct recommendation](./images/Needlelight/15DirectRecommendation.png "A direct community recommendation not to use Needlelight.")
 
 By this point, arguing online was not helping me make the project any better. So I started focusing on the actual software instead.
 
@@ -165,7 +167,7 @@ By this point, arguing online was not helping me make the project any better. So
 
 One of the support issues was basically the old project doing exactly what people said it did. It had trouble installing mods and identifying the Hollow Knight executable correctly.
 
-![Screenshot 16, support issue](/images/blog/Needlelight/16SupportIssue.png "A Needlelight support issue involving mod installation and executable detection.")
+![Screenshot 16, support issue](./images/Needlelight/16SupportIssue.png "A Needlelight support issue involving mod installation and executable detection.")
 
 This screenshot is actually one of the more useful ones in hindsight because it reminds me that the criticism was not all made up. The old project **was buggy**. It was not the finished launcher I wanted it to be.
 
@@ -181,7 +183,7 @@ First of all, I think Cogfly itself is a good launcher. I am not going to preten
 
 The part I had a problem with was the way Needlelight was sometimes described, especially the repeated framing of it as AI slop, star farming, or something that was not worth taking seriously.
 
-![Screenshot 17, Cogfly and star discussion](/images/blog/Needlelight/17CogflyStars.png "Discussion around Cogfly, Needlelight, GitHub stars, and the star farming claims.")
+![Screenshot 17, Cogfly and star discussion](./images/Needlelight/17CogflyStars.png "Discussion around Cogfly, Needlelight, GitHub stars, and the star farming claims.")
 
 There were also comments about how great it would be when Cogfly eventually passed Needlelight in stars, and Nix later said she would be happy about that happening.
 
@@ -203,7 +205,7 @@ Yes, Needlelight did trigger warnings for some people. That part was real.
 
 The reason was not that I had hidden malware inside the launcher. I was not financially capable of paying for executable signing and building up the reputation associated with properly signed software, so the Windows warning was unfortunately something I had to deal with.
 
-![Screenshot 18, SmartScreen discussion](/images/blog/Needlelight/18SmartScreen.png "Discussion about Windows Defender and SmartScreen warnings.")
+![Screenshot 18, SmartScreen discussion](./images/Needlelight/18SmartScreen.png "Discussion about Windows Defender and SmartScreen warnings.")
 
 But **a SmartScreen warning is not the same thing as malware**, and there has never been malicious behaviour hiding inside Needlelight.
 
@@ -221,7 +223,7 @@ So that is what I did.
 
 I started working on **v8.0.0.0**, a ground up rewrite.
 
-![Screenshot 19, rewrite discussion](/images/blog/Needlelight/19RewriteTalk.png "Discussion around the major rewrite and the new direction of Needlelight.")
+![Screenshot 19, rewrite discussion](./images/Needlelight/19RewriteTalk.png "Discussion around the major rewrite and the new direction of Needlelight.")
 
 The current codebase is built with **Tauri, Rust, and Vue**. The Rust side handles the native desktop functionality, filesystem operations, game detection, profiles, mod installation, configuration, and the other parts that need to talk directly to the user's system.
 
@@ -237,11 +239,11 @@ So no, it is not "Modrinth copied into Needlelight" either. It is a frontend bas
 
 Even while the rewrite was happening, people were still discussing the old controversy. There were new arguments about stars, whether Needlelight had already peaked, whether the launcher was actually useful, whether its frontend was copied, whether the project was AI generated, and whether its mod source handling made sense.
 
-![Screenshot 20, April star milestone](/images/blog/Needlelight/20AprilStars.png "April 2026 discussion around Needlelight's star count.")
+![Screenshot 20, April star milestone](./images/Needlelight/20AprilStars.png "April 2026 discussion around Needlelight's star count.")
 
-![Screenshot 21, July AI discussion](/images/blog/Needlelight/21JulyAI.png "July 2026 discussion around AI usage and Needlelight.")
+![Screenshot 21, July AI discussion](./images/Needlelight/21JulyAI.png "July 2026 discussion around AI usage and Needlelight.")
 
-![Screenshot 22, July launcher discussion](/images/blog/Needlelight/22JulyLauncher.png "July 2026 discussion around the launcher, indexing, and what Needlelight actually did.")
+![Screenshot 22, July launcher discussion](./images/Needlelight/22JulyLauncher.png "July 2026 discussion around the launcher, indexing, and what Needlelight actually did.")
 
 The funny thing is that by then I was not really building around the arguments anymore. I was building around the software.
 
@@ -319,6 +321,8 @@ I was not some mysterious developer trying to hijack an established community pr
 So if you find this blog because you saw one of the old screenshots and wondered what actually happened, my hope is that you get to the end and go:
 
 > Okay, they made a mistake. They understand why it was a mistake. They fixed it. They learned from it. And now they are good to go.
+
+**Update (07/10/26): My repo is no more a fork of Lumafly, it's totally mine now! Thanks Github Support for assisting me through this entire process despite it being disabled for me due to some limitations.**
 
 ## Timeline
 

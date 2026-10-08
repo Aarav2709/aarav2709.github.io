@@ -18,7 +18,6 @@ const projectsCollection = defineCollection({
         url: z.string().url(),
       })
     ).optional(),
-    stars: z.number().optional(),
     order: z.number().default(999),
   }),
 });
@@ -28,13 +27,13 @@ const blogCollection = defineCollection({
     pattern: "**/*.md",
     base: "src/content/blog",
   }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.coerce.date(),
-    cover: z.string().optional(),
-    draft: z.boolean().default(false),
-  }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      date: z.coerce.date(),
+      draft: z.boolean().default(false),
+    }),
 });
 
 export const collections = {

@@ -1,38 +1,30 @@
 ---
-import { getCollection } from "astro:content";
+import PageHeader from "../components/PageHeader.astro";
 import Layout from "../layouts/Layout.astro";
+import { formatDate, getPosts, readingTime } from "../utils/blog";
 
-const posts = await getCollection("blog", ({ data }) => !data.draft);
-const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const formatDate = (value: Date) =>
-  new Intl.DateTimeFormat("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(value);
+const posts = await getPosts();
 ---
 
 <Layout title="Blog | AarusPortfolio" description="Thoughts, devlogs, experiments, and things I learn while building.">
   <main id="main-content" class="page">
-    <section class="blog" aria-labelledby="blogTitle">
-      <header class="header reveal">
-        <h1 id="blogTitle">Blog</h1>
-        <p>Thoughts, devlogs, experiments, and things I learn while building.</p>
-      </header>
+    <PageHeader title="Blog" description="Thoughts, devlogs, experiments, and things I learn while building." />
 
-      <div class="posts">
-        {sortedPosts.map((post) => (
-          <article class="post reveal">
-            <a href={`/blog/${post.id}`} aria-label={`Read ${post.data.title}`}>
+    <ul class="posts">
+      {posts.map((post) => (
+        <li class="reveal">
+          <a href={`/blog/${post.id}`} class="surface post">
+            <p class="muted">
               <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
-              <h2>{post.data.title}</h2>
-              <p>{post.data.description}</p>
-            </a>
-          </article>
-        ))}
-      </div>
-    </section>
+              <span aria-hidden="true"> · </span>
+              {readingTime(post.body)} min read
+            </p>
+            <h2>{post.data.title}</h2>
+            <p class="description">{post.data.description}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
   </main>
 </Layout>
 
@@ -42,105 +34,41 @@ const formatDate = (value: Date) =>
   padding: 8rem var(--container-padding) 5rem;
 }
 
-.blog {
-  max-width: 66rem;
-  margin: 0 auto;
-}
-
-.header {
-  max-width: 44rem;
-  margin: 0 auto 3.5rem;
-  text-align: center;
-}
-
-h1 {
-  margin: 0;
-  color: var(--accent-color);
-  font-family: var(--font-display);
-  font-size: clamp(3.25rem, 7vw, 5.5rem);
-  font-weight: 700;
-  letter-spacing: -0.065em;
-  line-height: 0.95;
-}
-
-.header > p:last-child {
-  margin: 1.25rem 0 0;
-  color: var(--secondary-text);
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
 .posts {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  list-style: none;
 }
 
-.post a {
-  display: block;
-  height: 100%;
-  padding: 1.55rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--rounded-corner);
-  background: color-mix(in srgb, var(--glass-bg) 88%, transparent);
-  box-shadow: var(--edge-highlight);
+.post {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.4rem 1.5rem;
   color: inherit;
-  text-decoration: none;
-  transition: var(--transition-smooth);
-}
-
-.post a:hover {
-  border-color: color-mix(in srgb, var(--accent-color) 56%, transparent);
-  background: color-mix(in srgb, var(--accent-color) 7%, var(--glass-bg));
-  transform: translateY(-0.25rem);
-}
-
-time {
-  display: block;
-  color: var(--tertiary-text);
-  font-size: 0.82rem;
 }
 
 h2 {
-  margin: 0.9rem 0 0;
-  color: var(--primary-text);
-  font-family: var(--font-display);
-  font-size: clamp(1.45rem, 3vw, 1.9rem);
-  letter-spacing: -0.045em;
-  line-height: 1.08;
-  transition: color 0.2s ease;
-}
-
-.post a:hover h2 {
   color: var(--accent-color);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
 }
 
-.post p {
-  margin: 0.7rem 0 0;
+.description {
   color: var(--secondary-text);
-  font-size: 0.96rem;
   line-height: 1.6;
 }
 
-@media (max-width: 820px) {
-  .posts {
-    grid-template-columns: 1fr;
-    max-width: 42rem;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .page {
     padding-top: 6.5rem;
   }
 
-  .header {
-    margin-bottom: 2.4rem;
-  }
-
-  .post a {
-    padding: 1.3rem;
+  .post {
+    padding: 1.2rem;
   }
 }
 </style>

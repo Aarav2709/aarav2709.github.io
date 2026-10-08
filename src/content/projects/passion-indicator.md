@@ -1,8 +1,9 @@
 ---
 title: "PassionIndicator"
-description: "This is literally Yeolpumta, but for PCs. Simple right? This is a timer made for students like me who usually get distracted, so it's too helpful :)"
+description: "Yeolpumta, but for PCs. A study timer for students like me who get distracted easily."
 tech:
   - React
-github: "https://github.com/Aarav2709/LearningRepo"
+github: "https://github.com/Aarav2709/PassionIndicator"
 live: "https://passionindicator.vercel.app"
+order: 8
 ---

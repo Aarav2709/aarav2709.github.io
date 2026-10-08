@@ -1,7 +1,8 @@
 ---
-title: "AarusPortfolio"
-description: "Recreation of Buckshot Roulette, made by Mike Klubnika, but for PCs that can't run it // people can't afford it or those who want to get a CLI experience of the pretty same game. Revival of my old project from 2024. Archived since there are no plans to update it as of now."
+title: "Pylette"
+description: "A CLI recreation of Mike Klubnika's Buckshot Roulette for PCs that can't run the original, or anyone who wants a terminal version. A revival of my 2024 project, now archived."
 tech:
   - Python
 github: "https://github.com/Aarav2709/Pylette"
+order: 9
 ---

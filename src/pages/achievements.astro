@@ -1,6 +1,14 @@
 ---
 import AchievementCard from "../components/AchievementCard.astro";
+import ImageViewer from "../components/ImageViewer.astro";
+import PageHeader from "../components/PageHeader.astro";
 import Layout from "../layouts/Layout.astro";
+import CS50P from "../assets/certs/CS50P.png";
+import IITM from "../assets/certs/IITM.png";
+import IITR from "../assets/certs/IITR.png";
+import Incognito from "../assets/certs/Incognito.png";
+import Lumi from "../assets/certs/Lumi.png";
+import Silico from "../assets/certs/Silico.png";
 
 const achievements = [
   {
@@ -8,54 +16,48 @@ const achievements = [
     detail: "Harvard University",
     description:
       "Completed Harvard's CS50 Introduction to Programming with Python and received the official completion certificate.",
-    image: "/images/certs/CS50P.png",
+    image: CS50P,
     imageAlt: "CS50 Python Completion Certificate awarded by Harvard University.",
-    imageHref: "/images/certs/CS50P.png",
   },
   {
     title: "Level Zero, Game Dev Competition, 2nd Position!",
     detail: "Silico Battles v22.1 • Ahlcon Public School",
     description:
       "Won second prize in the game development competition held during Level Zero at Silico Battles v22.1.",
-    image: "/images/certs/Silico.png",
+    image: Silico,
     imageAlt: "Silico Battle v22.1 Trophy and Cert!",
-    imageHref: "/images/certs/Silico.png",
   },
   {
     title: "Turing Complete Python and DSA, 3rd Position!",
     detail: "Incognito Mark X • Somerville School Noida",
     description:
       "Placed third after competing with participants from 15 schools in the Python and DSA competition.",
-    image: "/images/certs/Incognito.png",
+    image: Incognito,
     imageAlt: "Incognito Mark X Trophy and Cert!",
-    imageHref: "/images/certs/Incognito.png",
   },
   {
     title: "GambitoR 4.0, IIT Roorkee, Certificate of Excellence!",
     detail: "One of the Top 80 Students across India!",
     description:
       "Qualified through maths, science, and reasoning preliminaries with over 10,000 students, earning a three day IIT Roorkee trip.",
-      image: "/images/certs/IITR.png",
-      imageAlt: "GambitoR 4.0 Certificate of Excellence!",
-      imageHref: "/images/certs/IITR.png",
+    image: IITR,
+    imageAlt: "GambitoR 4.0 Certificate of Excellence!",
   },
   {
     title: "Shaastra 2026, IIT Madras!",
     detail: "One of the 10 students selected for the Final Round!",
     description:
       "Advanced through rigorous Python and DSA, maths, and reasoning rounds against students from class 9 through college fourth year.",
-    image: "/images/certs/IITM.png",
+    image: IITM,
     imageAlt: "Shaastra 2026 Participation Certificate.",
-    imageHref: "/images/certs/IITM.png",
   },
   {
     title: "Lumi International Hackathon!",
     detail: "4th Position • $200 Prize",
     description:
       "Created HyprWeb, a WebOS that replicates Arch Linux and Hyprland. The project impressed judges, and the CEO of Lumi shared the achievement publicly.",
-    image: "/images/certs/Lumi.png",
+    image: Lumi,
     imageAlt: "Tweet by Lumi's CEO, for my achievement.",
-    imageHref: "/images/certs/Lumi.png",
   },
 ];
 ---
@@ -65,26 +67,18 @@ const achievements = [
   description="Selected awards, competition results, and project milestones by Aarav Gupta."
 >
   <main id="main-content" class="page">
-    <section class="achievements" aria-labelledby="achievementsTitle">
-      <header class="header reveal">
-        <h1 id="achievementsTitle">
-          Achievements
-        </h1>
+    <PageHeader
+      title="Achievements"
+      description="A collection of competitions, milestones, and work I am proud of."
+    />
 
-        <p>
-          A collection of competitions, milestones, and work I am proud of.
-        </p>
-      </header>
+    <div class="achievementList">
+      {achievements.map((achievement) => (
+        <AchievementCard {...achievement} />
+      ))}
+    </div>
 
-      <div class="achievementList">
-        {achievements.map((achievement, index) => (
-          <AchievementCard
-            {...achievement}
-            index={index}
-          />
-        ))}
-      </div>
-    </section>
+    <ImageViewer />
   </main>
 </Layout>
 
@@ -94,39 +88,11 @@ const achievements = [
   padding: 8rem var(--container-padding) 5rem;
 }
 
-.achievements {
-  max-width: 70rem;
-  margin: 0 auto;
-}
-
-.header {
-  max-width: 48rem;
-  margin: 0 auto 3.5rem;
-  text-align: center;
-}
-
-h1 {
-  margin: 0;
-  color: var(--accent-color);
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 7vw, 5.4rem);
-  font-weight: 700;
-  letter-spacing: -0.065em;
-  line-height: 0.95;
-}
-
-.header p {
-  margin: 1.2rem auto 0;
-  color: var(--secondary-text);
-  font-size: 1.08rem;
-  line-height: 1.7;
-  text-align: center;
-}
-
 .achievementList {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.15rem;
+  columns: 2;
+  column-gap: 1rem;
+  max-width: 58rem;
+  margin: 0 auto;
 }
 
 @media (max-width: 760px) {
@@ -134,12 +100,8 @@ h1 {
     padding-top: 6.5rem;
   }
 
-  .header {
-    margin-bottom: 2.5rem;
-  }
-
   .achievementList {
-    grid-template-columns: 1fr;
+    columns: 1;
   }
 }
 </style>

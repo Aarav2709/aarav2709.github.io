@@ -21,7 +21,7 @@
     left: 0;
     width: 7px;
     height: 7px;
-    background: #eefbcf;
+    background: var(--cursor-dot);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
@@ -33,8 +33,8 @@
       background-color 0.18s ease,
       transform 0.03s linear;
     opacity: 0;
-    box-shadow: 0 0 10px rgba(232, 247, 194, 0.66);
-    mix-blend-mode: screen;
+    box-shadow: 0 0 10px var(--cursor-glow);
+    mix-blend-mode: var(--cursor-blend);
   }
 
   .cursor-follower {
@@ -43,9 +43,9 @@
     left: 0;
     width: 30px;
     height: 30px;
-    border: 1px solid rgba(181, 214, 145, 0.58);
+    border: 1px solid var(--cursor-ring);
     border-radius: 999px;
-    background: rgba(167, 192, 128, 0.06);
+    background: color-mix(in srgb, var(--accent-color) 6%, transparent);
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
@@ -54,10 +54,9 @@
       height 0.2s ease,
       opacity 0.22s ease,
       border-color 0.2s ease,
-      background-color 0.2s ease,
+      background-color 0.2s ease;
     opacity: 0;
-    box-shadow: inset 0 0 0 1px rgba(233, 236, 210, 0.08);
-    mix-blend-mode: exclusion;
+    box-shadow: var(--edge-highlight);
   }
 
   .custom-cursor.visible,
@@ -74,8 +73,8 @@
   .cursor-follower.active {
     width: 42px;
     height: 42px;
-    border-color: rgba(232, 247, 194, 0.75);
-    background: rgba(167, 192, 128, 0.2);
+    border-color: var(--cursor-ring-active);
+    background: color-mix(in srgb, var(--accent-color) 20%, transparent);
   }
 
   .custom-cursor.pressed {
@@ -86,7 +85,7 @@
   .cursor-follower.pressed {
     width: 22px;
     height: 22px;
-    background: rgba(167, 192, 128, 0.28);
+    background: color-mix(in srgb, var(--accent-color) 28%, transparent);
   }
 
   @media (hover: none), (pointer: coarse) {

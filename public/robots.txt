@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aarus2709.me/sitemap.xml
+Sitemap: https://aarav2709.github.io/sitemap.xml

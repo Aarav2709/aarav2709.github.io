@@ -1,7 +1,8 @@
 ---
 title: "SprigAaru"
-description: "My personal fork of hackclub/sprig, where I make my own games, written in JS using sprig's firmware, for my Raspberry Pi Pico! This is also my first hardware project."
+description: "My fork of hackclub/sprig, where I make my own JavaScript games and run them on Sprig's firmware on a Raspberry Pi Pico. My first hardware project."
 tech:
-  - JS
+  - JavaScript
 github: "https://github.com/Aarav2709/SprigAaru"
+order: 12
 ---

@@ -1,9 +1,10 @@
 ---
 title: "HyPrism"
-description: "Multiplatform Hytale launcher written in C#. This is a better frontend with a version management system, similar to Prism Launcher! I was responsible for making the entire docs website, and owner for like for a week, before it got transferred to a organization itself!"
+description: "A cross-platform Hytale launcher in C# with version management, in the spirit of Prism Launcher. I built the entire docs website and owned the project for a week before it moved to its own organization."
 tech:
   - C#
-  - Typescript
+  - TypeScript
 github: "https://github.com/HyPrismTeam/Hyprism"
 live: "https://hyprismteam.github.io/hyprism-site/"
+order: 2
 ---

@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Satoshi";
-  src: url("/fonts/Satoshi-Regular.otf") format("opentype");
+  src: url("/fonts/Satoshi-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "Satoshi";
-  src: url("/fonts/Satoshi-Medium.otf") format("opentype");
+  src: url("/fonts/Satoshi-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -16,22 +16,16 @@
 
 @font-face {
   font-family: "Satoshi";
-  src: url("/fonts/Satoshi-Bold.otf") format("opentype");
-  font-weight: 700;
+  src: url("/fonts/Satoshi-Bold.woff2") format("woff2");
+  font-weight: 600 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Satoshi";
-  src: url("/fonts/Satoshi-Black.otf") format("opentype");
-  font-weight: 900;
+  font-family: "JetBrains Mono Variable";
+  src: url("/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  font-weight: 100 800;
   font-style: normal;
   font-display: swap;
-}
-
-:root {
-  --font-family: "Satoshi", sans-serif;
-  --font-display: "Satoshi", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
 }

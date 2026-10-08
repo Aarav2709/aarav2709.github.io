@@ -1,8 +1,12 @@
 ---
 title: "Fun Run 1: Replayed"
-description: "The FR1 Replayed Project, being led by Notedire, is a WIP, being recreated from the scratch all over again using Modern Tech, and Brand New Systems!"
+description: "A from-scratch recreation of the original Fun Run with modern tech and brand new systems, led by Notedire. Work in progress."
 tech:
   - Lua
   - Solar2D
 github: "https://github.com/Aarav2709/FR1-Replayed"
+buttons:
+  - text: "Download"
+    url: "https://github.com/Aarav2709/FR1-Replayed/releases/latest"
+order: 10
 ---

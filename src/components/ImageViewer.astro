@@ -1,0 +1,123 @@
+<dialog class="viewer" aria-label="Image viewer">
+  <button type="button" class="viewerClose" aria-label="Close image viewer">
+    ×
+  </button>
+
+  <img class="viewerImage" alt="" />
+</dialog>
+
+<script>
+  const viewer = document.querySelector<HTMLDialogElement>(".viewer");
+  const viewerImage = viewer?.querySelector<HTMLImageElement>(".viewerImage");
+  const close = viewer?.querySelector<HTMLButtonElement>(".viewerClose");
+
+  function open(src: string, alt: string) {
+    if (!viewer || !viewerImage) return;
+
+    viewerImage.src = src;
+    viewerImage.alt = alt;
+    viewer.showModal();
+    document.documentElement.style.overflow = "hidden";
+  }
+
+  document.addEventListener("click", (event) => {
+    const trigger = (event.target as Element).closest<HTMLElement>("[data-viewer-src], .blogZoom");
+    if (!trigger) return;
+
+    const image = trigger.querySelector("img");
+    open(
+      trigger.dataset.viewerSrc ?? image?.currentSrc ?? image?.src ?? "",
+      trigger.dataset.viewerAlt ?? image?.alt ?? "",
+    );
+  });
+
+  close?.addEventListener("click", () => viewer?.close());
+
+  viewer?.addEventListener("click", (event) => {
+    if (event.target === viewer) {
+      viewer.close();
+    }
+  });
+
+  viewer?.addEventListener("close", () => {
+    document.documentElement.style.overflow = "";
+  });
+</script>
+
+<style is:global>
+  /* The dialog sits above the custom cursor. */
+  html.has-fancy-cursor .viewer {
+    cursor: zoom-out !important;
+  }
+
+  html.has-fancy-cursor .viewer .viewerClose {
+    cursor: pointer !important;
+  }
+
+  html.has-fancy-cursor .viewer .viewerImage {
+    cursor: default !important;
+  }
+</style>
+
+<style>
+.viewer {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 2rem;
+  border: 0;
+  background: transparent;
+  opacity: 0;
+  transition: opacity .2s ease, display .2s allow-discrete, overlay .2s allow-discrete;
+}
+
+.viewer[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+
+@starting-style {
+  .viewer[open] {
+    opacity: 0;
+  }
+}
+
+.viewer::backdrop {
+  background: rgba(0, 0, 0, .82);
+}
+
+.viewerImage {
+  max-width: min(90vw, 1100px);
+  max-height: 90vh;
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+}
+
+.viewerClose {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--primary-text);
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: .8;
+}
+
+.viewerClose:hover {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewer {
+    transition: none;
+  }
+}
+</style>

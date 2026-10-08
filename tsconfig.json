@@ -9,26 +9,6 @@
     "node_modules"
   ],
   "compilerOptions": {
-    "allowJs": true,
-    "strictNullChecks": true,
-    "baseUrl": ".",
-    "ignoreDeprecations": "6.0",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@layouts/*": [
-        "src/layouts/*"
-      ],
-      "@styles/*": [
-        "src/styles/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ]
-    }
+    "allowJs": true
   }
 }

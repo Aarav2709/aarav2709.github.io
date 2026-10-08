@@ -1,0 +1,68 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Not found | AarusPortfolio" description="This page does not exist.">
+  <main id="main-content" class="page">
+    <section class="notFound">
+      <p class="code">404</p>
+
+      <h1>Page not found</h1>
+
+      <p>
+        Whatever you were looking for is not here. It may have moved, or it
+        never existed.
+      </p>
+
+      <div class="links">
+        <a href="/" class="button primary">Go home</a>
+        <a href="/projects" class="button">See projects</a>
+        <a href="/blog" class="button">Read the blog</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 8rem var(--container-padding) 4rem;
+}
+
+.notFound {
+  max-width: 36rem;
+  text-align: center;
+}
+
+.code {
+  color: var(--accent-color);
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 16vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+}
+
+h1 {
+  margin-top: 1rem;
+  color: var(--primary-text);
+  font-size: var(--section-size);
+}
+
+p {
+  margin-top: 1rem;
+  color: var(--secondary-text);
+  line-height: 1.7;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+</style>

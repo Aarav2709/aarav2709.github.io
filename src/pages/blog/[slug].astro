@@ -1,100 +1,79 @@
 ---
-import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 import BlogHeader from "../../components/BlogHeader.astro";
 import BlogMeta from "../../components/BlogMeta.astro";
+import ImageViewer from "../../components/ImageViewer.astro";
 import MarkdownContent from "../../components/MarkdownContent.astro";
 import Layout from "../../layouts/Layout.astro";
+import { getPosts, readingTime } from "../../utils/blog";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  const posts = await getPosts();
 
   return posts.map((post) => ({
-    params: {
-      slug: post.id,
-    },
-    props: {
-      post,
-    },
+    params: { slug: post.id },
+    props: { post },
   }));
+}
+
+interface Props {
+  post: CollectionEntry<"blog">;
 }
 
 const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title} | AarusPortfolio`} description={post.data.description}>
+<Layout title={`${post.data.title} | AarusPortfolio`} description={post.data.description} type="article">
   <main id="main-content" class="page">
     <article class="article">
-      <BlogHeader title={post.data.title} description={post.data.description} />
-
-      <BlogMeta date={post.data.date} />
-
-      <div class="divider" aria-hidden="true"></div>
+      <BlogHeader title={post.data.title} description={post.data.description}>
+        <BlogMeta date={post.data.date} minutes={readingTime(post.body)} />
+      </BlogHeader>
 
       <MarkdownContent>
         <Content />
       </MarkdownContent>
-
-      <footer class="articleFooter">
-        <p>Thanks for reading.</p>
-        <a href="/blog">Back to all posts</a>
-      </footer>
     </article>
+
+    <ImageViewer />
   </main>
 </Layout>
+
+<script>
+  document.addEventListener("click", async (event) => {
+    const button = (event.target as Element).closest<HTMLButtonElement>("[data-code-copy]");
+    const code = button?.closest("figure")?.querySelector("pre code");
+    if (!button || !code) return;
+
+    try {
+      await navigator.clipboard.writeText(code.textContent ?? "");
+      button.textContent = "Copied";
+    } catch {
+      button.textContent = "Failed";
+    }
+
+    setTimeout(() => {
+      button.textContent = "Copy";
+    }, 1800);
+  });
+</script>
 
 <style>
 .page {
   min-height: 100vh;
-  padding: 8rem var(--container-padding) 6rem;
+  padding: 7.5rem var(--container-padding) 5rem;
 }
 
 .article {
-  max-width: 68rem;
+  max-width: var(--content-width);
   margin: 0 auto;
-}
-
-.divider {
-  max-width: 48rem;
-  height: 1px;
-  margin: 3rem auto 0;
-  background: linear-gradient(90deg, transparent, var(--border-color) 12%, var(--border-color) 88%, transparent);
-}
-
-.articleFooter {
-  max-width: 48rem;
-  margin: 5rem auto 0;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--border-color);
-  text-align: center;
-}
-
-.articleFooter p {
-  margin: 0;
-  color: var(--secondary-text);
-}
-
-.articleFooter a {
-  display: inline-block;
-  margin-top: 0.9rem;
-  color: var(--accent-color);
-}
-
-.articleFooter a:hover {
-  color: var(--primary-text);
 }
 
 @media (max-width: 768px) {
   .page {
     padding-top: 6.5rem;
-  }
-
-  .divider {
-    margin-top: 2.5rem;
-  }
-
-  .articleFooter {
-    margin-top: 4rem;
   }
 }
 </style>

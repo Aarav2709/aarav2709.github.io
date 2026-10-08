@@ -1,10 +1,11 @@
 ---
 title: "LearningRepo"
-description: "Not a project, but just a repository where I'm mostly revising the langs I learnt before, doing DSA in those languages, and also I'm gonna start with new ones, like C++, etc."
+description: "Not really a project. This is where I revise languages I already know, practise DSA in them, and start new ones like C++."
 tech:
   - Python
   - HTML
   - CSS
-  - JS
+  - JavaScript
 github: "https://github.com/Aarav2709/LearningRepo"
+order: 15
 ---
