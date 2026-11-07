@@ -4,5 +4,5 @@ description: "A CLI recreation of Mike Klubnika's Buckshot Roulette for PCs that
 tech:
   - Python
 github: "https://github.com/Aarav2709/Pylette"
-order: 10
+order: 16
 ---

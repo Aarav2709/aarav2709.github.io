@@ -9,5 +9,5 @@ github: "https://github.com/Aarav2709/Needlelight"
 buttons:
   - text: "Download"
     url: "https://github.com/Aarav2709/Needlelight/releases/latest"
-order: 1
+order: 2
 ---

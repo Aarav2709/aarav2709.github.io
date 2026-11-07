@@ -4,5 +4,5 @@ description: "Hit your laptop when you're angry and it makes funny noises. Guara
 tech:
   - Rust
 github: "https://github.com/Aarav2709/SpankLaptop"
-order: 12
+order: 5
 ---

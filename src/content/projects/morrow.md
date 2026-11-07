@@ -6,5 +6,5 @@ tech:
   - TypeScript
   - CSS
 github: "https://github.com/Aarav2709/Morrow"
-order: 2
+order: 1
 ---

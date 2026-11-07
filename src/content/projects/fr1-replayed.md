@@ -8,5 +8,5 @@ github: "https://github.com/Aarav2709/FR1-Replayed"
 buttons:
   - text: "Download"
     url: "https://github.com/Aarav2709/FR1-Replayed/releases/latest"
-order: 11
+order: 10
 ---

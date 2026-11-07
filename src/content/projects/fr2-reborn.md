@@ -8,5 +8,5 @@ github: "https://github.com/Aarav2709/FR2-Reborn"
 buttons:
   - text: "Download"
     url: "https://github.com/Aarav2709/FR2-Reborn/releases/latest"
-order: 7
+order: 4
 ---

@@ -4,5 +4,5 @@ description: "Odd Even: Singleplayer, my first open source project. A hand crick
 tech:
   - Python
 github: "https://github.com/Aarav2709/OddEven-SP"
-order: 15
+order: 11
 ---
