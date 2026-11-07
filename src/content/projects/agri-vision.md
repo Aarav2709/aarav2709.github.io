@@ -8,5 +8,5 @@ tech:
   - Streamlit
 github: "https://github.com/Aarav2709/AgriVision"
 live: "https://agriviz.streamlit.app/"
-order: 5
+order: 6
 ---

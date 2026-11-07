@@ -6,5 +6,5 @@ tech:
   - TypeScript
 github: "https://github.com/HyPrismTeam/Hyprism"
 live: "https://hyprismteam.github.io/hyprism-site/"
-order: 2
+order: 3
 ---

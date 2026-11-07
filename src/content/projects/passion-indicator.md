@@ -5,5 +5,5 @@ tech:
   - React
 github: "https://github.com/Aarav2709/PassionIndicator"
 live: "https://passionindicator.vercel.app"
-order: 8
+order: 9
 ---

@@ -9,5 +9,5 @@ github: "https://github.com/Aarav2709/ProdTab"
 buttons:
   - text: "Demo"
     url: "https://prodtab.vercel.app"
-order: 7
+order: 8
 ---
